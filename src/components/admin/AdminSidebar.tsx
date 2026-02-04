@@ -42,7 +42,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
             className={`flex items-center gap-3 px-4 py-3 rounded-lg mb-1 transition-colors ${
               pathname === item.href
                 ? 'bg-primary/10 text-primary'
-                : 'text-gray-600 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700'
+                : 'text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
             <span className="material-symbols-outlined">{item.icon}</span>
@@ -55,7 +55,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
         <div className="text-sm text-gray-500 mb-2 truncate">{user.email}</div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 text-gray-600 dark:text-gray-100 hover:text-red-500 transition-colors"
+          className="flex items-center gap-2 text-gray-600 dark:text-white hover:text-red-500 transition-colors"
         >
           <span className="material-symbols-outlined text-xl">logout</span>
           로그아웃

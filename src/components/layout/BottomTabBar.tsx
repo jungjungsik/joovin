@@ -25,7 +25,7 @@ export function BottomTabBar({ tabs }: BottomTabBarProps) {
             key={tab.href}
             href={tab.href}
             className={`flex flex-col items-center transition-colors duration-200 ${
-              isActive ? "text-primary" : "text-gray-600 hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-50"
+              isActive ? "text-primary" : "text-gray-600 hover:text-gray-800 dark:text-white dark:hover:text-primary"
             }`}
           >
             <span className="material-symbols-outlined text-[24px]">{tab.icon}</span>

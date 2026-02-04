@@ -40,11 +40,11 @@ export default function PortfolioPage() {
 
         {loading ? (
           <div className="flex justify-center py-12">
-            <div className="text-gray-700 dark:text-gray-100">Loading...</div>
+            <div className="text-gray-700 dark:text-white">Loading...</div>
           </div>
         ) : filteredArtworks.length === 0 ? (
           <div className="flex justify-center py-12">
-            <div className="text-gray-700 dark:text-gray-100">등록된 작품이 없습니다.</div>
+            <div className="text-gray-700 dark:text-white">등록된 작품이 없습니다.</div>
           </div>
         ) : (
           <ArtworkGrid artworks={filteredArtworks} />

@@ -17,7 +17,7 @@ export function HomeFooter() {
           <span className="material-symbols-outlined">login</span>
         </Link>
       </div>
-      <p className="text-[10px] uppercase tracking-widest text-gray-600 dark:text-gray-200">
+      <p className="text-[10px] uppercase tracking-widest text-gray-600 dark:text-white">
         © 2024 Joovin NAM Portfolio
       </p>
       <div className="h-8" /> {/* Safe area for iOS home indicator */}
