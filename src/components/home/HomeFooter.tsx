@@ -13,9 +13,12 @@ export function HomeFooter() {
         <Link href="/contact" className="text-primary/80 hover:text-primary transition-colors">
           <span className="material-symbols-outlined">mail</span>
         </Link>
+        <Link href="/admin/login" className="text-primary/80 hover:text-primary transition-colors">
+          <span className="material-symbols-outlined">login</span>
+        </Link>
       </div>
       <p className="text-[10px] uppercase tracking-widest opacity-40">
-        © 2024 A. Sterling Portfolio
+        © 2024 Joovin NAM Portfolio
       </p>
       <div className="h-8" /> {/* Safe area for iOS home indicator */}
     </footer>
