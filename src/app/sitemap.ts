@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
-import { artworks } from "@/lib/data/artworks";
+import { getArtworks } from "@/lib/data/artworks";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://asterling.art";
+  const artworks = await getArtworks();
 
   const artworkUrls = artworks.map((artwork) => ({
     url: `${baseUrl}/portfolio/${artwork.slug}`,

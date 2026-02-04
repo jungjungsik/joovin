@@ -11,7 +11,7 @@ import {
   ReflectiveText,
   UpNextSection,
 } from "@/components/artwork";
-import { artworks, getArtworkBySlug, getAdjacentArtworks } from "@/lib/data/artworks";
+import { getAllSlugs, getArtworkBySlug, getAdjacentArtworks } from "@/lib/data/artworks";
 
 interface ArtworkPageProps {
   params: Promise<{ slug: string }>;
@@ -19,8 +19,9 @@ interface ArtworkPageProps {
 
 // Generate static params for all artworks
 export async function generateStaticParams() {
-  return artworks.map((artwork) => ({
-    slug: artwork.slug,
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
@@ -29,7 +30,7 @@ export async function generateMetadata({
   params,
 }: ArtworkPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const artwork = getArtworkBySlug(slug);
+  const artwork = await getArtworkBySlug(slug);
 
   if (!artwork) {
     return {
@@ -57,13 +58,13 @@ export async function generateMetadata({
 
 export default async function ArtworkPage({ params }: ArtworkPageProps) {
   const { slug } = await params;
-  const artwork = getArtworkBySlug(slug);
+  const artwork = await getArtworkBySlug(slug);
 
   if (!artwork) {
     notFound();
   }
 
-  const { next } = getAdjacentArtworks(slug);
+  const { next } = await getAdjacentArtworks(slug);
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
