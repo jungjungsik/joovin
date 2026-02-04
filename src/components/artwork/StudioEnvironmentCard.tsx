@@ -40,7 +40,7 @@ export function StudioEnvironmentCard({
 
         {/* Description */}
         {description && (
-          <p className="text-muted-gray/80 dark:text-gray-300 text-sm leading-relaxed">
+          <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed">
             {description}
           </p>
         )}

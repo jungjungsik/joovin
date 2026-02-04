@@ -10,7 +10,7 @@ export function ArchiveHeader({
   return (
     <div className="px-6 pt-6 pb-4">
       <h1 className="text-3xl font-bold tracking-tight mb-2">{title}</h1>
-      <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+      <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
         {description}
       </p>
     </div>

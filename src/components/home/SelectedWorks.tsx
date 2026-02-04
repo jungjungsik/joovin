@@ -33,7 +33,7 @@ export function SelectedWorks({ artworks = [] }: SelectedWorksProps) {
             </div>
             <div className="flex flex-col items-center">
               <span className="text-xs font-semibold tracking-wide">{artwork.title}</span>
-              <span className="text-[10px] opacity-60 italic">
+              <span className="text-[10px] text-gray-600 dark:text-gray-400 italic">
                 {artwork.medium}, {artwork.year}
               </span>
             </div>

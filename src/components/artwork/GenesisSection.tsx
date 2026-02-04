@@ -39,7 +39,7 @@ export function GenesisSection({ images, description }: GenesisSectionProps) {
 
         {/* Description */}
         {description && (
-          <p className="text-muted-gray/80 dark:text-gray-300 leading-relaxed text-sm">
+          <p className="text-gray-800 dark:text-gray-200 leading-relaxed text-sm">
             {description}
           </p>
         )}

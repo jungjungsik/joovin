@@ -27,7 +27,7 @@ export function TechnicalInsight({ quote, detailImage }: TechnicalInsightProps) 
       </h3>
 
       {/* Quote */}
-      <blockquote className="serif-text text-lg italic text-muted-gray dark:text-gray-200 leading-relaxed">
+      <blockquote className="serif-text text-lg italic text-gray-800 dark:text-gray-100 leading-relaxed">
         &ldquo;{quote}&rdquo;
       </blockquote>
     </section>

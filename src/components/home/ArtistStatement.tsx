@@ -16,7 +16,7 @@ export function ArtistStatement({
       <h2 className="text-muted-gray dark:text-gray-100 tracking-tight text-sm font-semibold leading-tight pb-4 uppercase tracking-[0.2em]">
         Artist Statement
       </h2>
-      <p className="serif-text text-xl italic font-normal leading-relaxed text-center text-muted-gray dark:text-gray-300 max-w-sm">
+      <p className="serif-text text-xl italic font-normal leading-relaxed text-center text-gray-800 dark:text-gray-200 max-w-sm">
         "{quote}"
       </p>
       <div className="flex px-4 py-6 justify-center">

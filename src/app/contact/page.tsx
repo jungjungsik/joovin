@@ -16,7 +16,7 @@ export default function ContactPage() {
       <main className="flex flex-1 flex-col items-center justify-center px-8 pb-24">
         <ContactHeadline />
 
-        <GoldUnderline className="mb-12 opacity-80" />
+        <GoldUnderline className="mb-12" />
 
         <ContactLinks contact={contactInfo} />
       </main>
