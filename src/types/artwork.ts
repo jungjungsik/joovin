@@ -20,6 +20,7 @@ export interface Artwork {
   heroImage: string;
   processImages?: string[];
   technicalInsight?: string;
+  technicalInsightImage?: string;
   studioImage?: string;
   studioText?: string;
   reflection?: string;

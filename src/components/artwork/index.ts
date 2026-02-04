@@ -7,3 +7,4 @@ export { TechnicalInsight } from "./TechnicalInsight";
 export { StudioEnvironmentCard } from "./StudioEnvironmentCard";
 export { ReflectiveText } from "./ReflectiveText";
 export { UpNextSection } from "./UpNextSection";
+export { ArtworkPageHeader } from "./ArtworkPageHeader";

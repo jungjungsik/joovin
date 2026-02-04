@@ -17,6 +17,7 @@ interface ArtworkRow {
   hero_image: string;
   process_images?: string[];
   technical_insight?: string;
+  technical_insight_image?: string;
   studio_image?: string;
   studio_text?: string;
   reflection?: string;
@@ -43,6 +44,7 @@ function transformArtwork(row: ArtworkRow): Artwork {
     heroImage: row.hero_image,
     processImages: row.process_images,
     technicalInsight: row.technical_insight,
+    technicalInsightImage: row.technical_insight_image,
     studioImage: row.studio_image,
     studioText: row.studio_text,
     reflection: row.reflection,

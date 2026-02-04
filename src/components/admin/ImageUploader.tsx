@@ -7,10 +7,11 @@ interface ImageUploaderProps {
   value?: string
   onChange: (url: string) => void
   label: string
+  description?: string
   aspectRatio?: string
 }
 
-export function ImageUploader({ value, onChange, label, aspectRatio = "aspect-square" }: ImageUploaderProps) {
+export function ImageUploader({ value, onChange, label, description, aspectRatio = "aspect-square" }: ImageUploaderProps) {
   const [uploading, setUploading] = useState(false)
   const [dragOver, setDragOver] = useState(false)
 
@@ -55,7 +56,10 @@ export function ImageUploader({ value, onChange, label, aspectRatio = "aspect-sq
 
   return (
     <div>
-      <label className="block text-sm font-medium mb-2">{label}</label>
+      <label className="block text-sm font-medium mb-1">{label}</label>
+      {description && (
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{description}</p>
+      )}
       <div
         onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
         onDragLeave={() => setDragOver(false)}

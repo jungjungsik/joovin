@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHeader } from "@/components/layout/PageHeader";
 import {
   ArtworkHero,
   ArtworkMeta,
@@ -10,6 +9,7 @@ import {
   StudioEnvironmentCard,
   ReflectiveText,
   UpNextSection,
+  ArtworkPageHeader,
 } from "@/components/artwork";
 import { getAllSlugs, getArtworkBySlug, getAdjacentArtworks } from "@/lib/data/artworks";
 
@@ -69,13 +69,7 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
       {/* Sticky Header with Back + Actions */}
-      <PageHeader
-        variant={{
-          type: "back-actions",
-          showShare: true,
-          showFavorite: true,
-        }}
-      />
+      <ArtworkPageHeader slug={slug} />
 
       <main className="flex flex-col flex-1 pb-24">
         {/* Hero Image */}
@@ -105,7 +99,7 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
         {artwork.technicalInsight && (
           <TechnicalInsight
             quote={artwork.technicalInsight}
-            detailImage={`https://picsum.photos/seed/${artwork.slug}-detail/800/800`}
+            detailImage={artwork.technicalInsightImage}
           />
         )}
 

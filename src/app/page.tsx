@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { MobileMenu } from "@/components/layout/MobileMenu";
 import { HeroIllustration } from "@/components/home/HeroIllustration";
 import { ArtistStatement } from "@/components/home/ArtistStatement";
 import { SelectedWorks } from "@/components/home/SelectedWorks";
@@ -11,6 +12,7 @@ import { Artwork } from "@/types";
 
 export default function HomePage() {
   const [featuredArtworks, setFeaturedArtworks] = useState<Artwork[]>([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     getFeaturedArtworks().then(setFeaturedArtworks);
@@ -20,7 +22,10 @@ export default function HomePage() {
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
       <PageHeader
         variant={{ type: "home", title: "Joovin NAM", aboutLink: true }}
+        onMenuClick={() => setIsMenuOpen(true)}
       />
+
+      <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
       <main className="flex flex-col flex-1">
         <HeroIllustration />

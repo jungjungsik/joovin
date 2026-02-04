@@ -17,6 +17,7 @@ interface ArtworkFormData {
   hero_image: string
   process_images?: string[]
   technical_insight?: string
+  technical_insight_image?: string
   studio_image?: string
   studio_text?: string
   reflection?: string
@@ -45,6 +46,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
     hero_image: initialData?.hero_image || '',
     process_images: initialData?.process_images || [],
     technical_insight: initialData?.technical_insight || '',
+    technical_insight_image: initialData?.technical_insight_image || '',
     studio_image: initialData?.studio_image || '',
     studio_text: initialData?.studio_text || '',
     reflection: initialData?.reflection || '',
@@ -182,18 +184,21 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ImageUploader
             label="썸네일 (1:1) *"
+            description="포트폴리오 목록에 표시되는 정사각형 이미지입니다. 작품의 전체 모습이 잘 보이도록 해주세요."
             value={formData.thumbnail}
             onChange={(url) => updateField('thumbnail', url)}
             aspectRatio="aspect-square"
           />
           <ImageUploader
             label="히어로 이미지 (4:5) *"
+            description="작품 상세 페이지 상단에 크게 표시되는 메인 이미지입니다. 세로형 비율로 작품을 가장 잘 보여주는 사진을 선택하세요."
             value={formData.hero_image}
             onChange={(url) => updateField('hero_image', url)}
             aspectRatio="aspect-[4/5]"
           />
           <ImageUploader
-            label="스튜디오 이미지"
+            label="스튜디오 이미지 (16:9)"
+            description="작업실이나 제작 환경을 보여주는 가로형 이미지입니다. 작품이 만들어진 공간의 분위기를 전달해주세요."
             value={formData.studio_image}
             onChange={(url) => updateField('studio_image', url)}
             aspectRatio="aspect-video"
@@ -205,6 +210,13 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
         <h2 className="text-lg font-semibold mb-4">추가 정보 (선택)</h2>
         <div className="space-y-4">
+          <ImageUploader
+            label="기법 상세 이미지 (1:1)"
+            description="작품의 붓터치, 질감, 세부 기법을 클로즈업한 정사각형 이미지입니다. 기술적 특징을 강조하는 부분을 촬영해주세요."
+            value={formData.technical_insight_image}
+            onChange={(url) => updateField('technical_insight_image', url)}
+            aspectRatio="aspect-square"
+          />
           <div>
             <label className="block text-sm font-medium mb-1">기법 설명</label>
             <textarea

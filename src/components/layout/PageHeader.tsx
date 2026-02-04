@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 type HeaderVariant =
   | { type: "home"; title: string; aboutLink?: boolean }
@@ -22,7 +23,7 @@ export function PageHeader({ variant, onMenuClick }: PageHeaderProps) {
     router.back();
   };
 
-  // Home variant: Hamburger | Title (center) | About link
+  // Home variant: Hamburger | Title (center) | Theme Toggle + About link
   if (variant.type === "home") {
     return (
       <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 pb-2 justify-between">
@@ -41,7 +42,8 @@ export function PageHeader({ variant, onMenuClick }: PageHeaderProps) {
           {variant.title}
         </Link>
 
-        <div className="flex w-12 items-center justify-end">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           {variant.aboutLink && (
             <Link
               href="/about"
