@@ -17,7 +17,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
       <PageHeader
         variant={{ type: "home", title: "Joovin NAM", aboutLink: true }}
       />

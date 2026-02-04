@@ -41,12 +41,14 @@ export function BottomTabBar({ tabs }: BottomTabBarProps) {
 
 // Preset tab configurations
 export const PORTFOLIO_TABS: TabItem[] = [
+  { icon: "home", label: "Home", href: "/" },
   { icon: "grid_view", label: "Gallery", href: "/portfolio" },
   { icon: "face", label: "Profile", href: "/about" },
   { icon: "mail", label: "Contact", href: "/contact" },
 ];
 
 export const ABOUT_TABS: TabItem[] = [
+  { icon: "home", label: "Home", href: "/" },
   { icon: "grid_view", label: "Work", href: "/portfolio" },
   { icon: "face", label: "About", href: "/about" },
   { icon: "mail", label: "Connect", href: "/contact" },

@@ -9,7 +9,7 @@ import { profile } from "@/lib/data/profile";
 
 export default function AboutPage() {
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
       <PageHeader variant={{ type: "back-title", title: "THE ARTIST'S JOURNEY" }} />
 
       <main className="flex-1 pb-20">
@@ -32,7 +32,7 @@ export default function AboutPage() {
         </div>
 
         <div className="mt-6 px-6 text-center">
-          <p className="italic text-gray-700 dark:text-gray-100 custom-serif text-lg">
+          <p className="italic text-gray-700 dark:text-white custom-serif text-lg">
             "{profile.closingQuote}"
           </p>
         </div>

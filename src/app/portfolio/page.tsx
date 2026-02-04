@@ -26,7 +26,7 @@ export default function PortfolioPage() {
     : artworks.filter(a => a.tag === activeFilter);
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
       <PageHeader variant={{ type: "back-search", title: "PORTFOLIO" }} />
 
       <main className="flex-1">

@@ -8,7 +8,7 @@ import { contactInfo } from "@/lib/data/profile";
 
 export default function ContactPage() {
   return (
-    <div className="relative flex h-screen w-full flex-col overflow-x-hidden">
+    <div className="relative flex h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
       <GrainBackground />
 
       <PageHeader variant={{ type: "back-only" }} />
