@@ -18,7 +18,7 @@ export function FilterPills({ categories, active, onChange }: FilterPillsProps) 
           className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
             active === cat.value
               ? "bg-primary text-white"
-              : "bg-transparent border border-gray-400 dark:border-gray-500 text-gray-800 dark:text-gray-100 hover:border-primary"
+              : "bg-transparent border border-gray-400 dark:border-gray-500 text-gray-800 dark:text-gray-50 hover:border-primary"
           }`}
         >
           {cat.label}

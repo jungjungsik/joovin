@@ -20,7 +20,7 @@ export function ArtworkMeta({
 
   return (
     <section className="px-6 py-6 space-y-4">
-      <h1 className="text-[32px] font-bold leading-tight text-muted-gray dark:text-gray-100">
+      <h1 className="text-[32px] font-bold leading-tight text-muted-gray dark:text-white">
         {title}
       </h1>
 

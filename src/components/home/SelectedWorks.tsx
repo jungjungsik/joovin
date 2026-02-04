@@ -13,7 +13,7 @@ export function SelectedWorks({ artworks = [] }: SelectedWorksProps) {
 
   return (
     <section className="px-6 pb-12">
-      <h3 className="text-muted-gray dark:text-gray-100 text-[10px] font-bold uppercase tracking-[0.3em] mb-6 text-center">
+      <h3 className="text-muted-gray dark:text-white text-[10px] font-bold uppercase tracking-[0.3em] mb-6 text-center">
         Selected Works
       </h3>
       <div className="grid grid-cols-1 gap-12">
@@ -33,7 +33,7 @@ export function SelectedWorks({ artworks = [] }: SelectedWorksProps) {
             </div>
             <div className="flex flex-col items-center">
               <span className="text-xs font-semibold tracking-wide">{artwork.title}</span>
-              <span className="text-[10px] text-gray-600 dark:text-gray-400 italic">
+              <span className="text-[10px] text-gray-600 dark:text-gray-100 italic">
                 {artwork.medium}, {artwork.year}
               </span>
             </div>
@@ -43,7 +43,7 @@ export function SelectedWorks({ artworks = [] }: SelectedWorksProps) {
       <div className="flex px-4 py-12 justify-center">
         <Link
           href="/portfolio"
-          className="group flex items-center justify-center h-10 px-4 bg-transparent text-muted-gray dark:text-gray-200 text-xs font-bold uppercase tracking-[0.2em]"
+          className="group flex items-center justify-center h-10 px-4 bg-transparent text-muted-gray dark:text-gray-50 text-xs font-bold uppercase tracking-[0.2em]"
         >
           <span className="border-b-2 border-primary pb-1">View Full Portfolio</span>
         </Link>

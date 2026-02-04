@@ -18,7 +18,7 @@ export function StudioEnvironmentCard({
             <span className="material-symbols-outlined text-xl">brush</span>
           </div>
           <div>
-            <h4 className="font-bold text-muted-gray dark:text-gray-100">
+            <h4 className="font-bold text-muted-gray dark:text-white">
               Studio Environment
             </h4>
             <p className="text-sm text-gold-muted">
@@ -40,7 +40,7 @@ export function StudioEnvironmentCard({
 
         {/* Description */}
         {description && (
-          <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed">
+          <p className="text-gray-800 dark:text-gray-50 text-sm leading-relaxed">
             {description}
           </p>
         )}

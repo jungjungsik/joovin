@@ -68,7 +68,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-background-light dark:bg-background-dark font-display text-muted-gray dark:text-gray-200 min-h-screen">
+      <body className="bg-background-light dark:bg-background-dark font-display text-muted-gray dark:text-gray-50 min-h-screen">
         {children}
       </body>
     </html>

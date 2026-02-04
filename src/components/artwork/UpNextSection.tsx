@@ -20,7 +20,7 @@ export function UpNextSection({ artwork }: UpNextSectionProps) {
             </p>
 
             {/* Title */}
-            <span className="text-xl font-bold text-muted-gray dark:text-gray-100 group-hover:text-primary transition-colors">
+            <span className="text-xl font-bold text-muted-gray dark:text-white group-hover:text-primary transition-colors">
               {artwork.title}
             </span>
 

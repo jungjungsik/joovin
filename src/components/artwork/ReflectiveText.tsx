@@ -21,7 +21,7 @@ export function ReflectiveText({
         />
 
         {/* Reflective Text */}
-        <p className="serif-text text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-md italic">
+        <p className="serif-text text-lg text-gray-800 dark:text-gray-50 leading-relaxed max-w-md italic">
           &ldquo;{text}&rdquo;
         </p>
 

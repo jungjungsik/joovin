@@ -32,7 +32,7 @@ export default function AboutPage() {
         </div>
 
         <div className="mt-6 px-6 text-center">
-          <p className="italic text-gray-700 dark:text-gray-300 custom-serif text-lg">
+          <p className="italic text-gray-700 dark:text-gray-100 custom-serif text-lg">
             "{profile.closingQuote}"
           </p>
         </div>

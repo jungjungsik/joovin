@@ -11,10 +11,10 @@ export default function NotFound() {
           <h1 className="text-6xl font-display font-light text-primary mb-4">
             404
           </h1>
-          <h2 className="text-2xl font-display font-medium text-muted-gray dark:text-gray-200 mb-4">
+          <h2 className="text-2xl font-display font-medium text-muted-gray dark:text-white mb-4">
             Page Not Found
           </h2>
-          <p className="font-serif text-muted-gray/70 dark:text-gray-400 mb-8">
+          <p className="font-serif text-muted-gray/70 dark:text-gray-200 mb-8">
             The artwork you're looking for seems to have wandered off the canvas.
           </p>
           <Link
