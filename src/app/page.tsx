@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { HeroImage } from "@/components/home/HeroImage";
+import { HeroIllustration } from "@/components/home/HeroIllustration";
 import { ArtistStatement } from "@/components/home/ArtistStatement";
 import { SelectedWorks } from "@/components/home/SelectedWorks";
 import { HomeFooter } from "@/components/home/HomeFooter";
@@ -23,10 +23,7 @@ export default function HomePage() {
       />
 
       <main className="flex flex-col flex-1">
-        <HeroImage
-          src="https://picsum.photos/seed/hero-artwork/1200/800"
-          alt="A powerful abstract expressionist painting with bold textures"
-        />
+        <HeroIllustration />
 
         <ArtistStatement
           quote="My work explores the intersection of creative process and authenticity, using traditional mediums to express contemporary themes of human connection."
