@@ -34,9 +34,12 @@ export function PageHeader({ variant, onMenuClick }: PageHeaderProps) {
           <span className="material-symbols-outlined text-2xl">menu</span>
         </button>
 
-        <h2 className="text-muted-gray dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center uppercase tracking-widest">
+        <Link
+          href="/about"
+          className="text-muted-gray dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center uppercase tracking-widest hover:text-primary transition-colors"
+        >
           {variant.title}
-        </h2>
+        </Link>
 
         <div className="flex w-12 items-center justify-end">
           {variant.aboutLink && (
