@@ -43,7 +43,6 @@ export function BottomTabBar({ tabs }: BottomTabBarProps) {
 export const PORTFOLIO_TABS: TabItem[] = [
   { icon: "grid_view", label: "Gallery", href: "/portfolio" },
   { icon: "face", label: "Profile", href: "/about" },
-  { icon: "museum", label: "Exhibits", href: "/exhibits" },
   { icon: "mail", label: "Contact", href: "/contact" },
 ];
 

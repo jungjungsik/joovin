@@ -1,14 +1,13 @@
 export const SITE_CONFIG = {
-  name: "A. Sterling",
-  title: "A. Sterling | Art Portfolio",
+  name: "Joovin NAM",
+  title: "Joovin NAM | Art Portfolio",
   description: "High school art student portfolio showcasing paintings, drawings, and mixed media works.",
-  url: "https://asterling.art",
+  url: "https://joovin.vercel.app",
 };
 
 export const NAV_ITEMS = [
   { label: "Gallery", href: "/portfolio", icon: "grid_view" },
   { label: "Profile", href: "/about", icon: "face" },
-  { label: "Exhibits", href: "/exhibits", icon: "museum" },
   { label: "Contact", href: "/contact", icon: "mail" },
 ];
 
