@@ -33,6 +33,7 @@ export interface Profile {
   title: string;
   classYear: string;
   profileImage: string;
+  profileImages?: string[];
   processTitle: string;
   processText: string[];
   school: string;

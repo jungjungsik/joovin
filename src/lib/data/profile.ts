@@ -4,7 +4,12 @@ export const profile: Profile = {
   name: "Joovin NAM",
   title: "High School Student",
   classYear: "Class of 2026",
-  profileImage: "/images/profile/joovin-portrait.jpg",
+  profileImage: "/images/profile/joovin-1.jpg",
+  profileImages: [
+    "/images/profile/joovin-1.jpg",
+    "/images/profile/joovin-2.jpg",
+    "/images/profile/joovin-3.jpg",
+  ],
   processTitle: "My Process",
   processText: [
     "Art is my way of making sense of the world. I focus on raw textures and the 'happy accidents' that happen when I stop trying to be perfect. My work is a journey of finding authenticity in every brushstroke.",
