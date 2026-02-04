@@ -1,0 +1,129 @@
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { PageHeader } from "@/components/layout/PageHeader";
+import {
+  ArtworkHero,
+  ArtworkMeta,
+  ArtworkDescription,
+  GenesisSection,
+  TechnicalInsight,
+  StudioEnvironmentCard,
+  ReflectiveText,
+  UpNextSection,
+} from "@/components/artwork";
+import { artworks, getArtworkBySlug, getAdjacentArtworks } from "@/lib/data/artworks";
+
+interface ArtworkPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+// Generate static params for all artworks
+export async function generateStaticParams() {
+  return artworks.map((artwork) => ({
+    slug: artwork.slug,
+  }));
+}
+
+// Generate dynamic metadata for SEO
+export async function generateMetadata({
+  params,
+}: ArtworkPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const artwork = getArtworkBySlug(slug);
+
+  if (!artwork) {
+    return {
+      title: "Artwork Not Found",
+    };
+  }
+
+  return {
+    title: `${artwork.title} | A. Sterling`,
+    description: artwork.description,
+    openGraph: {
+      title: artwork.title,
+      description: artwork.description,
+      images: [artwork.heroImage],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: artwork.title,
+      description: artwork.description,
+      images: [artwork.heroImage],
+    },
+  };
+}
+
+export default async function ArtworkPage({ params }: ArtworkPageProps) {
+  const { slug } = await params;
+  const artwork = getArtworkBySlug(slug);
+
+  if (!artwork) {
+    notFound();
+  }
+
+  const { next } = getAdjacentArtworks(slug);
+
+  return (
+    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
+      {/* Sticky Header with Back + Actions */}
+      <PageHeader
+        variant={{
+          type: "back-actions",
+          showShare: true,
+          showFavorite: true,
+        }}
+      />
+
+      <main className="flex flex-col flex-1 pb-24">
+        {/* Hero Image */}
+        <ArtworkHero src={artwork.heroImage} alt={artwork.title} />
+
+        {/* Title, Tag, and Meta Info */}
+        <ArtworkMeta
+          title={artwork.title}
+          subtitle={artwork.subtitle}
+          medium={artwork.medium}
+          dimensions={artwork.dimensions}
+          season={artwork.season}
+        />
+
+        {/* Main Description */}
+        <ArtworkDescription text={artwork.description} />
+
+        {/* Genesis Section - Only if process images exist */}
+        {artwork.processImages && artwork.processImages.length > 0 && (
+          <GenesisSection
+            images={artwork.processImages}
+            description="Initial sketches and compositional studies exploring the relationship between form and negative space."
+          />
+        )}
+
+        {/* Technical Insight - Only if insight text exists */}
+        {artwork.technicalInsight && (
+          <TechnicalInsight
+            quote={artwork.technicalInsight}
+            detailImage={`https://picsum.photos/seed/${artwork.slug}-detail/800/800`}
+          />
+        )}
+
+        {/* Studio Environment Card - Only if studio image exists */}
+        {artwork.studioImage && (
+          <StudioEnvironmentCard
+            image={artwork.studioImage}
+            description={artwork.studioText}
+          />
+        )}
+
+        {/* Reflective Text with CTA - Only if reflection exists */}
+        {artwork.reflection && (
+          <ReflectiveText text={artwork.reflection} ctaLabel="View Full Series" ctaHref="/portfolio" />
+        )}
+
+        {/* Up Next Section - Only if there's a next artwork */}
+        {next && <UpNextSection artwork={next} />}
+      </main>
+    </div>
+  );
+}

@@ -1,0 +1,65 @@
+// Filter categories (per Stitch design)
+export type FilterCategory = 'all' | 'selected-works' | 'sketchbook';
+
+// Item tags (displayed on artwork cards)
+export type ItemTag = 'selected-works' | 'sketchbook' | 'process';
+
+// Artwork information
+export interface Artwork {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  year: number;
+  tag: ItemTag;
+  medium: string;
+  dimensions: string;
+  season?: string;
+  description: string;
+  thumbnail: string;
+  heroImage: string;
+  processImages?: string[];
+  technicalInsight?: string;
+  studioImage?: string;
+  studioText?: string;
+  reflection?: string;
+  featured?: boolean;
+  order?: number;
+}
+
+// Profile information (About page)
+export interface Profile {
+  name: string;
+  title: string;
+  classYear: string;
+  profileImage: string;
+  processTitle: string;
+  processText: string[];
+  school: string;
+  graduationDate: string;
+  interests: string[];
+  closingQuote: string;
+}
+
+// Contact information
+export interface ContactInfo {
+  email: string;
+  socialHandle: string;
+  socialUrl: string;
+}
+
+// Page header configuration
+export type HeaderVariant =
+  | { type: 'home'; title: string; aboutLink: boolean }
+  | { type: 'back-title'; title: string }
+  | { type: 'back-search'; title: string }
+  | { type: 'back-actions'; showShare: boolean; showFavorite: boolean }
+  | { type: 'back-only' };
+
+// Bottom tab configuration
+export interface TabItem {
+  icon: string;
+  label: string;
+  href: string;
+  active?: boolean;
+}
