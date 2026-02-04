@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <PageHeader
-        variant={{ type: "home", title: "A. Sterling", aboutLink: true }}
+        variant={{ type: "home", title: "Joovin NAM", aboutLink: true }}
       />
 
       <main className="flex flex-col flex-1">

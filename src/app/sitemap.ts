@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getArtworks } from "@/lib/data/artworks";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://asterling.art";
+  const baseUrl = "https://joovin.vercel.app";
   const artworks = await getArtworks();
 
   const artworkUrls = artworks.map((artwork) => ({

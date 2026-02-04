@@ -29,7 +29,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
     <aside className="fixed left-0 top-0 h-full w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 hidden md:block">
       <div className="p-6">
         <Link href="/" className="text-xl font-display font-semibold text-primary">
-          A. Sterling
+          Joovin NAM
         </Link>
         <p className="text-xs text-gray-500 mt-1">Admin Panel</p>
       </div>

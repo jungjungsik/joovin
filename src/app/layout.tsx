@@ -18,34 +18,34 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://asterling.art"),
+  metadataBase: new URL("https://joovin.vercel.app"),
   title: {
-    default: "A. Sterling | Art Portfolio",
-    template: "%s | A. Sterling Portfolio",
+    default: "Joovin NAM | Art Portfolio",
+    template: "%s | Joovin NAM Portfolio",
   },
   description: "High school art student portfolio showcasing paintings, drawings, and mixed media works. Explore my creative journey and artistic vision.",
   keywords: ["art portfolio", "high school artist", "paintings", "drawings", "mixed media", "college art application"],
-  authors: [{ name: "A. Sterling" }],
-  creator: "A. Sterling",
+  authors: [{ name: "Joovin NAM" }],
+  creator: "Joovin NAM",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://asterling.art",
-    siteName: "A. Sterling Portfolio",
-    title: "A. Sterling | Art Portfolio",
+    url: "https://joovin.vercel.app",
+    siteName: "Joovin NAM Portfolio",
+    title: "Joovin NAM | Art Portfolio",
     description: "High school art student portfolio showcasing paintings, drawings, and mixed media works.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "A. Sterling Art Portfolio",
+        alt: "Joovin NAM Art Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "A. Sterling | Art Portfolio",
+    title: "Joovin NAM | Art Portfolio",
     description: "High school art student portfolio showcasing paintings, drawings, and mixed media works.",
     images: ["/og-image.jpg"],
   },
