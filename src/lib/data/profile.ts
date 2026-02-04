@@ -3,7 +3,7 @@ import { Profile, ContactInfo } from "@/types";
 export const profile: Profile = {
   name: "Joovin NAM",
   title: "High School Student",
-  classYear: "Class of 2025",
+  classYear: "Class of 2026",
   profileImage: "/images/profile/joovin-portrait.jpg",
   processTitle: "My Process",
   processText: [
@@ -11,7 +11,7 @@ export const profile: Profile = {
     "Currently, I'm exploring the intersection of traditional charcoal drawing and digital layered textures. I believe that digital tools shouldn't lose the soul of the hand.",
   ],
   school: "The Courtyard International School of Tervuren",
-  graduationDate: "June 2025",
+  graduationDate: "June 2026",
   interests: [
     "Mixed Media",
     "Charcoal Portraits",
