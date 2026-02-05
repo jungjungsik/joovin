@@ -16,6 +16,5 @@ export const profile: Profile = {
 
 export const contactInfo: ContactInfo = {
   email: "",
-  socialHandle: "",
-  socialUrl: "",
+  socialLinks: {},
 };
