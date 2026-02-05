@@ -8,7 +8,7 @@ interface ArtworkRow {
   title: string;
   subtitle?: string;
   year: number;
-  tag: ItemTag;
+  tag: string; // Allow any string from DB, will be normalized
   medium: string;
   dimensions: string;
   season?: string;
@@ -27,6 +27,19 @@ interface ArtworkRow {
   updated_at?: string;
 }
 
+// Valid tags - map legacy values to new ones
+const VALID_TAGS: ItemTag[] = ['selected-works', 'drawings', 'paintings', 'digital', 'wip', 'sketchbook'];
+const TAG_MAPPING: Record<string, ItemTag> = {
+  'process': 'wip', // Legacy mapping
+};
+
+function normalizeTag(tag: string): ItemTag {
+  if (VALID_TAGS.includes(tag as ItemTag)) {
+    return tag as ItemTag;
+  }
+  return TAG_MAPPING[tag] || 'sketchbook'; // Default fallback
+}
+
 // Transform database row to frontend type
 function transformArtwork(row: ArtworkRow): Artwork {
   return {
@@ -35,7 +48,7 @@ function transformArtwork(row: ArtworkRow): Artwork {
     title: row.title,
     subtitle: row.subtitle,
     year: row.year,
-    tag: row.tag,
+    tag: normalizeTag(row.tag),
     medium: row.medium,
     dimensions: row.dimensions,
     season: row.season,
