@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ImageUploader } from './ImageUploader'
+import { MultiImageUploader } from './MultiImageUploader'
 
 interface ArtworkFormData {
   title: string
@@ -90,10 +91,10 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Basic Info */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">기본 정보</h2>
+        <h2 className="text-lg font-semibold mb-4">Basic Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium mb-1">제목 *</label>
+            <label className="block text-sm font-medium mb-1">Title *</label>
             <input
               type="text"
               value={formData.title}
@@ -103,7 +104,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">부제목</label>
+            <label className="block text-sm font-medium mb-1">Subtitle</label>
             <input
               type="text"
               value={formData.subtitle}
@@ -112,7 +113,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">연도 *</label>
+            <label className="block text-sm font-medium mb-1">Year *</label>
             <input
               type="number"
               value={formData.year}
@@ -122,7 +123,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">카테고리 *</label>
+            <label className="block text-sm font-medium mb-1">Category *</label>
             <select
               value={formData.tag}
               onChange={(e) => updateField('tag', e.target.value as ArtworkFormData['tag'])}
@@ -134,28 +135,28 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">시즌</label>
+            <label className="block text-sm font-medium mb-1">Season</label>
             <input
               type="text"
               value={formData.season}
               onChange={(e) => updateField('season', e.target.value)}
-              placeholder="예: Fall 2024"
+              placeholder="e.g., Fall 2024"
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">매체 *</label>
+            <label className="block text-sm font-medium mb-1">Medium *</label>
             <input
               type="text"
               value={formData.medium}
               onChange={(e) => updateField('medium', e.target.value)}
-              placeholder="예: Oil on Canvas"
+              placeholder="e.g., Oil on Canvas"
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">크기 *</label>
+            <label className="block text-sm font-medium mb-1">Dimensions *</label>
             <input
               type="text"
               value={formData.dimensions}
@@ -166,7 +167,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium mb-1">설명 *</label>
+            <label className="block text-sm font-medium mb-1">Description *</label>
             <textarea
               value={formData.description}
               onChange={(e) => updateField('description', e.target.value)}
@@ -180,70 +181,79 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
 
       {/* Images */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">이미지</h2>
+        <h2 className="text-lg font-semibold mb-4">Images</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ImageUploader
-            label="썸네일 (1:1) *"
-            description="포트폴리오 목록에 표시되는 정사각형 이미지입니다. 작품의 전체 모습이 잘 보이도록 해주세요."
+            label="Thumbnail (1:1) *"
+            description="Square image displayed in the portfolio list. Ensure the full artwork is clearly visible."
             value={formData.thumbnail}
             onChange={(url) => updateField('thumbnail', url)}
             aspectRatio="aspect-square"
           />
           <ImageUploader
-            label="히어로 이미지 (4:5) *"
-            description="작품 상세 페이지 상단에 크게 표시되는 메인 이미지입니다. 세로형 비율로 작품을 가장 잘 보여주는 사진을 선택하세요."
+            label="Hero Image (4:5) *"
+            description="Main image displayed prominently at the top of the artwork detail page. Choose a portrait-oriented photo that best showcases your work."
             value={formData.hero_image}
             onChange={(url) => updateField('hero_image', url)}
             aspectRatio="aspect-[4/5]"
           />
           <ImageUploader
-            label="스튜디오 이미지 (16:9)"
-            description="작업실이나 제작 환경을 보여주는 가로형 이미지입니다. 작품이 만들어진 공간의 분위기를 전달해주세요."
+            label="Studio Image (16:9)"
+            description="Landscape image showing your studio or working environment. Convey the atmosphere of the space where your artwork was created."
             value={formData.studio_image}
             onChange={(url) => updateField('studio_image', url)}
             aspectRatio="aspect-video"
           />
+          <div className="md:col-span-2">
+            <MultiImageUploader
+              label="Artwork Images (Cartoon/Comic/Series)"
+              description="Upload multi-page works in order. Use the up/down buttons to rearrange the sequence."
+              value={formData.process_images || []}
+              onChange={(urls) => updateField('process_images', urls)}
+              maxImages={30}
+            />
+          </div>
         </div>
       </section>
 
       {/* Optional Details */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">추가 정보 (선택)</h2>
+        <h2 className="text-lg font-semibold mb-4">Additional Details (Optional)</h2>
         <div className="space-y-4">
           <ImageUploader
-            label="기법 상세 이미지 (1:1)"
-            description="작품의 붓터치, 질감, 세부 기법을 클로즈업한 정사각형 이미지입니다. 기술적 특징을 강조하는 부분을 촬영해주세요."
+            label="Technique Detail Image (1:1)"
+            description="Square close-up image showing brushwork, texture, and detailed techniques. Capture sections that emphasize technical characteristics."
             value={formData.technical_insight_image}
             onChange={(url) => updateField('technical_insight_image', url)}
             aspectRatio="aspect-square"
           />
           <div>
-            <label className="block text-sm font-medium mb-1">기법 설명</label>
+            <label className="block text-sm font-medium mb-1">Technique Description</label>
             <textarea
               value={formData.technical_insight}
               onChange={(e) => updateField('technical_insight', e.target.value)}
               rows={3}
-              placeholder="작품의 기법적 특징을 설명해주세요"
+              placeholder="Describe the technical characteristics of your artwork"
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">스튜디오 설명</label>
+            <label className="block text-sm font-medium mb-1">Studio Description</label>
             <textarea
               value={formData.studio_text}
               onChange={(e) => updateField('studio_text', e.target.value)}
               rows={2}
-              placeholder="작업 환경에 대해 설명해주세요"
+              placeholder="Describe your working environment"
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">작가 회고</label>
+            <label className="block text-sm font-medium mb-1">Artist Reflection</label>
             <textarea
               value={formData.reflection}
               onChange={(e) => updateField('reflection', e.target.value)}
               rows={2}
-              placeholder="작품에 대한 개인적인 생각"
+              placeholder="Your personal thoughts about the artwork"
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             />
           </div>
@@ -252,7 +262,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
 
       {/* Settings */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">설정</h2>
+        <h2 className="text-lg font-semibold mb-4">Settings</h2>
         <div className="flex items-center gap-6">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -261,10 +271,10 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
               onChange={(e) => updateField('featured', e.target.checked)}
               className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
             />
-            <span>홈페이지에 표시 (Featured)</span>
+            <span>Show on Homepage (Featured)</span>
           </label>
           <div className="flex items-center gap-2">
-            <label className="text-sm">정렬 순서:</label>
+            <label className="text-sm">Sort Order:</label>
             <input
               type="number"
               value={formData.sort_order}
@@ -282,14 +292,14 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
           disabled={loading}
           className="bg-primary text-background-dark px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
         >
-          {loading ? '저장 중...' : artworkId ? '수정하기' : '등록하기'}
+          {loading ? 'Saving...' : artworkId ? 'Update' : 'Create'}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
           className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         >
-          취소
+          Cancel
         </button>
       </div>
     </form>

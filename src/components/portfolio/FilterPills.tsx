@@ -10,7 +10,7 @@ interface FilterPillsProps {
 
 export function FilterPills({ categories, active, onChange }: FilterPillsProps) {
   return (
-    <div className="flex gap-2 px-6 py-4 overflow-x-auto">
+    <div className="max-w-6xl mx-auto flex gap-2 px-6 py-4 overflow-x-auto lg:justify-center">
       {categories.map((cat) => (
         <button
           key={cat.value}

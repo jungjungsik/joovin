@@ -44,7 +44,7 @@ export default function PortfolioPage() {
           </div>
         ) : filteredArtworks.length === 0 ? (
           <div className="flex justify-center py-12">
-            <div className="text-gray-700 dark:text-white">등록된 작품이 없습니다.</div>
+            <div className="text-gray-700 dark:text-white">No artworks available.</div>
           </div>
         ) : (
           <ArtworkGrid artworks={filteredArtworks} />

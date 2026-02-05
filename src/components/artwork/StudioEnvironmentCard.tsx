@@ -10,7 +10,7 @@ export function StudioEnvironmentCard({
   description,
 }: StudioEnvironmentCardProps) {
   return (
-    <section className="px-6 py-6">
+    <section className="px-6 lg:px-0 py-6 max-w-4xl mx-auto">
       <div className="bg-white dark:bg-[#1a170e] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 space-y-5">
         {/* Header with Icon */}
         <div className="flex items-center gap-3">
@@ -34,7 +34,7 @@ export function StudioEnvironmentCard({
             alt="Studio environment"
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, 896px"
           />
         </div>
 

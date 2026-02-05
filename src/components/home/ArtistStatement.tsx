@@ -12,7 +12,8 @@ export function ArtistStatement({
   linkHref = "/about"
 }: ArtistStatementProps) {
   return (
-    <section className="py-10 px-8 flex flex-col items-center">
+    <section className="py-10 px-8 lg:py-16 lg:px-0 flex flex-col items-center">
+      <div className="max-w-6xl mx-auto w-full flex flex-col items-center">
       <h2 className="text-muted-gray dark:text-white tracking-tight text-sm font-semibold leading-tight pb-4 uppercase tracking-[0.2em]">
         Artist Statement
       </h2>
@@ -28,6 +29,7 @@ export function ArtistStatement({
             {linkText}
           </span>
         </Link>
+      </div>
       </div>
     </section>
   );

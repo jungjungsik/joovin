@@ -86,8 +86,8 @@ export function ImageUploader({ value, onChange, label, description, aspectRatio
             ) : (
               <>
                 <span className="material-symbols-outlined text-4xl text-gray-400 mb-2">cloud_upload</span>
-                <span className="text-sm text-gray-500">클릭하거나 드래그하여 업로드</span>
-                <span className="text-xs text-gray-400 mt-1">JPG, PNG, WebP (최대 5MB)</span>
+                <span className="text-sm text-gray-500">Click or drag to upload</span>
+                <span className="text-xs text-gray-400 mt-1">JPG, PNG, WebP (Max 5MB)</span>
               </>
             )}
             <input

@@ -12,7 +12,7 @@ export function ReflectiveText({
   ctaHref = "/portfolio",
 }: ReflectiveTextProps) {
   return (
-    <section className="px-6 py-12">
+    <section className="px-6 lg:px-0 py-12 max-w-3xl mx-auto">
       <div className="flex flex-col items-center text-center space-y-8">
         {/* Vertical Decorative Line */}
         <div

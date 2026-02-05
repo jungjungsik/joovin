@@ -10,6 +10,7 @@ import {
   ReflectiveText,
   UpNextSection,
   ArtworkPageHeader,
+  BackToPortfolio,
 } from "@/components/artwork";
 import { getAllSlugs, getArtworkBySlug, getAdjacentArtworks } from "@/lib/data/artworks";
 
@@ -115,6 +116,9 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
         {artwork.reflection && (
           <ReflectiveText text={artwork.reflection} ctaLabel="View Full Series" ctaHref="/portfolio" />
         )}
+
+        {/* Back to Portfolio Button */}
+        <BackToPortfolio />
 
         {/* Up Next Section - Only if there's a next artwork */}
         {next && <UpNextSection artwork={next} />}

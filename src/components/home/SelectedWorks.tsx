@@ -12,11 +12,12 @@ export function SelectedWorks({ artworks = [] }: SelectedWorksProps) {
   }
 
   return (
-    <section className="px-6 pb-12">
-      <h3 className="text-muted-gray dark:text-white text-[10px] font-bold uppercase tracking-[0.3em] mb-6 text-center">
-        Selected Works
-      </h3>
-      <div className="grid grid-cols-1 gap-12">
+    <section className="px-6 pb-12 lg:pb-16">
+      <div className="max-w-6xl mx-auto">
+        <h3 className="text-muted-gray dark:text-white text-[10px] font-bold uppercase tracking-[0.3em] mb-6 text-center">
+          Selected Works
+        </h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-12 lg:gap-8">
         {artworks.map((artwork) => (
           <Link
             key={artwork.id}
@@ -39,14 +40,15 @@ export function SelectedWorks({ artworks = [] }: SelectedWorksProps) {
             </div>
           </Link>
         ))}
-      </div>
-      <div className="flex px-4 py-12 justify-center">
+        </div>
+        <div className="flex px-4 py-12 justify-center">
         <Link
           href="/portfolio"
           className="group flex items-center justify-center h-10 px-4 bg-transparent text-muted-gray dark:text-gray-50 text-xs font-bold uppercase tracking-[0.2em]"
         >
           <span className="border-b-2 border-primary pb-1">View Full Portfolio</span>
         </Link>
+        </div>
       </div>
     </section>
   );

@@ -21,8 +21,9 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
   }
 
   const navItems = [
-    { href: '/admin', label: '대시보드', icon: 'dashboard' },
-    { href: '/admin/artworks/new', label: '작품 등록', icon: 'add_photo_alternate' },
+    { href: '/admin', label: 'Dashboard', icon: 'dashboard' },
+    { href: '/admin/artworks/new', label: 'New Artwork', icon: 'add_photo_alternate' },
+    { href: '/admin/settings', label: 'Settings', icon: 'settings' },
   ]
 
   return (
@@ -58,7 +59,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
           className="flex items-center gap-2 text-gray-600 dark:text-white hover:text-red-500 transition-colors"
         >
           <span className="material-symbols-outlined text-xl">logout</span>
-          로그아웃
+          Logout
         </button>
       </div>
     </aside>

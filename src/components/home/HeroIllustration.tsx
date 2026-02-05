@@ -3,7 +3,8 @@
 export function HeroIllustration() {
   return (
     <section className="px-6 py-4">
-      <div className="w-full aspect-[4/5] relative rounded-xl overflow-hidden ios-shadow bg-gradient-to-br from-[#f5f3f0] to-[#e8e4de] dark:from-[#2a2518] dark:to-[#1a170e] flex items-center justify-center">
+      <div className="max-w-6xl mx-auto">
+        <div className="w-full aspect-[4/5] lg:max-h-[70vh] relative rounded-xl overflow-hidden ios-shadow bg-gradient-to-br from-[#f5f3f0] to-[#e8e4de] dark:from-[#2a2518] dark:to-[#1a170e] flex items-center justify-center">
         <svg
           viewBox="0 0 400 500"
           className="w-full h-full p-8"
@@ -135,6 +136,7 @@ export function HeroIllustration() {
             where ideas take form
           </text>
         </svg>
+        </div>
       </div>
     </section>
   );

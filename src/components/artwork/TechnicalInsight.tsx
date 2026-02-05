@@ -7,16 +7,16 @@ interface TechnicalInsightProps {
 
 export function TechnicalInsight({ quote, detailImage }: TechnicalInsightProps) {
   return (
-    <section className="px-6 py-10 space-y-6">
+    <section className="px-6 lg:px-0 py-10 max-w-4xl mx-auto space-y-6">
       {/* Detail Image */}
       {detailImage && (
-        <div className="relative aspect-square rounded-xl overflow-hidden ios-shadow">
+        <div className="relative aspect-square lg:max-w-2xl lg:mx-auto rounded-xl overflow-hidden ios-shadow">
           <Image
             src={detailImage}
             alt="Technical detail of the artwork"
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, 672px"
           />
         </div>
       )}

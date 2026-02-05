@@ -17,7 +17,7 @@ export function BottomTabBar({ tabs }: BottomTabBarProps) {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 px-8 py-3 flex justify-between items-center safe-area-bottom z-40">
+    <nav className="fixed bottom-0 left-0 right-0 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 px-8 py-3 flex justify-between items-center safe-area-bottom z-40 lg:hidden">
       {tabs.map((tab) => {
         const isActive = pathname === tab.href;
         return (

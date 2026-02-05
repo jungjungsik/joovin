@@ -10,14 +10,10 @@ import { PageHeader } from './PageHeader';
 // ============================================================================
 // VARIANT 1: HOME
 // ============================================================================
-// Use case: Main landing page with navigation menu and about link
-// Layout: Hamburger menu | Title (center) | About link
+// Use case: Main landing page with title and about link
+// Layout: Title (left) | Theme Toggle + About link (right)
 
 export function HomePageExample() {
-  const handleMenuClick = () => {
-    console.log('Open navigation menu');
-  };
-
   return (
     <PageHeader
       variant={{
@@ -25,7 +21,6 @@ export function HomePageExample() {
         title: "A. STERLING",
         aboutLink: true,
       }}
-      onMenuClick={handleMenuClick}
     />
   );
 }

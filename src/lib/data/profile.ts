@@ -4,12 +4,8 @@ export const profile: Profile = {
   name: "Joovin NAM",
   title: "High School Student",
   classYear: "Class of 2026",
-  profileImage: "/images/profile/joovin-1.jpg",
-  profileImages: [
-    "/images/profile/joovin-1.jpg",
-    "/images/profile/joovin-2.jpg",
-    "/images/profile/joovin-3.jpg",
-  ],
+  profileImage: "",
+  profileImages: [],
   processTitle: "My Process",
   processText: [
     "Art is my way of making sense of the world—a constant dialogue between who I am and who I'm becoming. Drawing, above all, is my truest companion. It has walked beside me through every season of life, never asking for anything except presence and honesty. When I draw, I discover myself. I find peace in the rhythm of mark-making, joy in the quiet concentration, and a kind of homecoming that nothing else provides.",

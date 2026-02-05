@@ -8,8 +8,8 @@ export function ArchiveHeader({
   description = "A collection of explorations, finished works, and the raw process of creation."
 }: ArchiveHeaderProps) {
   return (
-    <div className="px-6 pt-6 pb-4">
-      <h1 className="text-3xl font-bold tracking-tight mb-2">{title}</h1>
+    <div className="max-w-6xl mx-auto px-6 pt-6 pb-4">
+      <h1 className="text-3xl lg:text-4xl font-bold tracking-tight mb-2">{title}</h1>
       <p className="text-gray-700 dark:text-white text-sm leading-relaxed">
         {description}
       </p>
