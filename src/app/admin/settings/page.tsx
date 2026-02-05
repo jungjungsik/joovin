@@ -33,6 +33,12 @@ interface SettingsData {
   // Images
   profileImages: string[];
   homeHeroImage: string;
+
+  // Contact Information
+  contactHeadline: string;
+  email: string;
+  socialHandle: string;
+  socialUrl: string;
 }
 
 export default function SettingsPage() {
@@ -65,6 +71,12 @@ export default function SettingsPage() {
     // Images
     profileImages: [],
     homeHeroImage: "",
+
+    // Contact Information
+    contactHeadline: "Let's talk art.",
+    email: "",
+    socialHandle: "",
+    socialUrl: "",
   });
 
   useEffect(() => {
@@ -273,6 +285,53 @@ export default function SettingsPage() {
             placeholder="A closing quote or statement for your about page"
             className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
           />
+        </div>
+      </section>
+
+      {/* Contact Information */}
+      <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Contact Information</h2>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Contact Headline</label>
+            <input
+              type="text"
+              value={settings.contactHeadline}
+              onChange={(e) => setSettings({ ...settings, contactHeadline: e.target.value })}
+              placeholder="e.g., Let's talk art."
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Email</label>
+            <input
+              type="email"
+              value={settings.email}
+              onChange={(e) => setSettings({ ...settings, email: e.target.value })}
+              placeholder="your@email.com"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Social Handle</label>
+            <input
+              type="text"
+              value={settings.socialHandle}
+              onChange={(e) => setSettings({ ...settings, socialHandle: e.target.value })}
+              placeholder="e.g., @joovin_art"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Social URL</label>
+            <input
+              type="url"
+              value={settings.socialUrl}
+              onChange={(e) => setSettings({ ...settings, socialUrl: e.target.value })}
+              placeholder="https://instagram.com/joovin_art"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
         </div>
       </section>
 
