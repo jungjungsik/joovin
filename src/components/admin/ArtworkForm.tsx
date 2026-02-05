@@ -9,7 +9,7 @@ interface ArtworkFormData {
   title: string
   subtitle?: string
   year: number
-  tag: 'selected-works' | 'sketchbook' | 'process'
+  tag: 'selected-works' | 'drawings' | 'paintings' | 'digital' | 'wip' | 'sketchbook'
   medium: string
   dimensions: string
   season?: string
@@ -130,8 +130,11 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             >
               <option value="selected-works">Selected Works</option>
+              <option value="drawings">Drawings</option>
+              <option value="paintings">Paintings</option>
+              <option value="digital">Digital Art</option>
+              <option value="wip">Work in Progress</option>
               <option value="sketchbook">Sketchbook</option>
-              <option value="process">Process</option>
             </select>
           </div>
           <div>

@@ -30,6 +30,10 @@ export function FilterPills({ categories, active, onChange }: FilterPillsProps) 
 
 export const FILTER_CATEGORIES: { value: FilterCategory; label: string }[] = [
   { value: "all", label: "ALL" },
-  { value: "selected-works", label: "SELECTED WORKS" },
+  { value: "selected-works", label: "SELECTED" },
+  { value: "drawings", label: "DRAWINGS" },
+  { value: "paintings", label: "PAINTINGS" },
+  { value: "digital", label: "DIGITAL" },
+  { value: "wip", label: "WIP" },
   { value: "sketchbook", label: "SKETCHBOOK" },
 ];

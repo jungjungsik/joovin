@@ -1,8 +1,8 @@
-// Filter categories (per Stitch design)
-export type FilterCategory = 'all' | 'selected-works' | 'sketchbook';
+// Filter categories for portfolio page
+export type FilterCategory = 'all' | 'selected-works' | 'drawings' | 'paintings' | 'digital' | 'wip' | 'sketchbook';
 
-// Item tags (displayed on artwork cards)
-export type ItemTag = 'selected-works' | 'sketchbook' | 'process';
+// Item tags (stored in database for each artwork)
+export type ItemTag = 'selected-works' | 'drawings' | 'paintings' | 'digital' | 'wip' | 'sketchbook';
 
 // Artwork information
 export interface Artwork {
