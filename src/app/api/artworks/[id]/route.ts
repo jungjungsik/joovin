@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 
 type Params = { params: Promise<{ id: string }> }
@@ -52,6 +53,11 @@ export async function PUT(request: NextRequest, { params }: Params) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
+  // Revalidate cached pages
+  revalidatePath('/portfolio')
+  revalidatePath(`/portfolio/${data.slug}`)
+  revalidatePath('/')
+
   return NextResponse.json(data)
 }
 
@@ -65,6 +71,13 @@ export async function DELETE(request: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  // Get slug before deleting for cache invalidation
+  const { data: artwork } = await supabase
+    .from('artworks')
+    .select('slug')
+    .eq('id', id)
+    .single()
+
   const { error } = await supabase
     .from('artworks')
     .delete()
@@ -73,6 +86,13 @@ export async function DELETE(request: NextRequest, { params }: Params) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
+
+  // Revalidate cached pages
+  revalidatePath('/portfolio')
+  if (artwork?.slug) {
+    revalidatePath(`/portfolio/${artwork.slug}`)
+  }
+  revalidatePath('/')
 
   return NextResponse.json({ success: true })
 }

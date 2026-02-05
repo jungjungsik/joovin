@@ -14,6 +14,9 @@ import {
 } from "@/components/artwork";
 import { getAllSlugs, getArtworkBySlug, getAdjacentArtworks } from "@/lib/data/artworks";
 
+// Revalidate pages every 60 seconds to pick up content changes
+export const revalidate = 60;
+
 interface ArtworkPageProps {
   params: Promise<{ slug: string }>;
 }
