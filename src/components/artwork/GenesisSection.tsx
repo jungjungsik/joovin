@@ -27,7 +27,7 @@ export function GenesisSection({ images, description }: GenesisSectionProps) {
         <div className="flex items-center justify-between">
           <div className="space-y-2">
             {/* Section Label */}
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gold-muted">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gold-muted dark:text-gray-400">
               The Genesis
             </h3>
 

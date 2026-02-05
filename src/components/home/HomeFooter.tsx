@@ -45,7 +45,7 @@ export function HomeFooter() {
         </Link>
       </div>
       <p className="text-[10px] uppercase tracking-widest text-gray-600 dark:text-white">
-        © 2024 Joovin NAM Portfolio
+        © 2026 Joovin NAM Portfolio · Developed by Jungsik Jung
       </p>
       <div className="h-8" /> {/* Safe area for iOS home indicator */}
     </footer>

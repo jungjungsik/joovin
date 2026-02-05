@@ -62,10 +62,10 @@ export function ProfileHero({ profile }: ProfileHeroProps) {
 
       {/* Name and Title */}
       <div className="text-center space-y-1">
-        <p className="text-3xl font-bold tracking-tight custom-serif italic">
+        <p className="text-3xl font-bold tracking-tight custom-serif italic dark:text-white">
           Hi, I'm {profile.name}
         </p>
-        <p className="text-primary font-medium text-sm tracking-widest uppercase">
+        <p className="text-primary dark:text-primary font-medium text-sm tracking-widest uppercase">
           {profile.title} | {profile.classYear}
         </p>
       </div>

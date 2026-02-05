@@ -21,7 +21,7 @@ export function StudioEnvironmentCard({
             <h4 className="font-bold text-muted-gray dark:text-white">
               Studio Environment
             </h4>
-            <p className="text-sm text-gold-muted">
+            <p className="text-sm text-gold-muted dark:text-gray-400">
               Where the work happens
             </p>
           </div>

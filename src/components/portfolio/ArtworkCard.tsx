@@ -27,7 +27,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
         />
       </div>
       <div className="mt-3 text-center">
-        <h3 className="text-sm font-semibold">{artwork.title}</h3>
+        <h3 className="text-sm font-semibold dark:text-white">{artwork.title}</h3>
         <p className="text-[10px] text-primary uppercase tracking-wider mt-1">
           {tagLabels[artwork.tag]}
         </p>

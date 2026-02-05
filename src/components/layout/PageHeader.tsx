@@ -50,7 +50,7 @@ export function PageHeader({ variant }: PageHeaderProps) {
     );
   }
 
-  // Back-title variant: Back arrow | Title (center)
+  // Back-title variant: Back arrow | Title (center) | Home button (desktop only)
   if (variant.type === "back-title") {
     return (
       <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-8 py-4 pb-2 justify-between">
@@ -67,13 +67,20 @@ export function PageHeader({ variant }: PageHeaderProps) {
             {variant.title}
           </h1>
 
-          <div className="w-12 shrink-0" />
+          <Link
+            href="/"
+            className="hidden lg:flex text-muted-gray dark:text-gray-200 size-12 shrink-0 items-center justify-center hover:text-primary transition-colors"
+            aria-label="Home"
+          >
+            <span className="material-symbols-outlined text-2xl">home</span>
+          </Link>
+          <div className="w-12 shrink-0 lg:hidden" />
         </div>
       </header>
     );
   }
 
-  // Back-search variant: Back arrow | Title (center) | Search icon
+  // Back-search variant: Back arrow | Title (center) | Search icon + Home button (desktop)
   if (variant.type === "back-search") {
     return (
       <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-8 py-4 pb-2 justify-between">
@@ -90,19 +97,28 @@ export function PageHeader({ variant }: PageHeaderProps) {
             {variant.title}
           </h1>
 
-          <button
-            onClick={variant.onSearch}
-            className="text-muted-gray dark:text-gray-50 flex size-12 shrink-0 items-center justify-center hover:opacity-70 transition-opacity"
-            aria-label="Search"
-          >
-            <span className="material-symbols-outlined text-2xl">search</span>
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={variant.onSearch}
+              className="text-muted-gray dark:text-gray-50 flex size-12 shrink-0 items-center justify-center hover:opacity-70 transition-opacity"
+              aria-label="Search"
+            >
+              <span className="material-symbols-outlined text-2xl">search</span>
+            </button>
+            <Link
+              href="/"
+              className="hidden lg:flex text-muted-gray dark:text-gray-50 size-12 shrink-0 items-center justify-center hover:text-primary transition-colors"
+              aria-label="Home"
+            >
+              <span className="material-symbols-outlined text-2xl">home</span>
+            </Link>
+          </div>
         </div>
       </header>
     );
   }
 
-  // Back-actions variant: Back arrow | Share + Favorite buttons
+  // Back-actions variant: Back arrow | Share + Favorite + Home buttons
   if (variant.type === "back-actions") {
     return (
       <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-8 py-4 pb-2 justify-between">
@@ -140,17 +156,24 @@ export function PageHeader({ variant }: PageHeaderProps) {
                 </span>
               </button>
             )}
+            <Link
+              href="/"
+              className="hidden lg:flex text-muted-gray dark:text-gray-50 size-10 items-center justify-center hover:text-primary transition-colors"
+              aria-label="Home"
+            >
+              <span className="material-symbols-outlined text-xl">home</span>
+            </Link>
           </div>
         </div>
       </header>
     );
   }
 
-  // Back-only variant: Just back arrow
+  // Back-only variant: Back arrow + Home button (desktop)
   if (variant.type === "back-only") {
     return (
       <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-8 py-4 pb-2">
-        <div className="max-w-6xl mx-auto w-full flex items-center">
+        <div className="max-w-6xl mx-auto w-full flex items-center justify-between">
           <button
             onClick={handleBack}
             className="text-muted-gray dark:text-gray-50 flex size-12 shrink-0 items-center justify-center hover:opacity-70 transition-opacity"
@@ -158,6 +181,14 @@ export function PageHeader({ variant }: PageHeaderProps) {
           >
             <span className="material-symbols-outlined text-2xl">arrow_back_ios</span>
           </button>
+
+          <Link
+            href="/"
+            className="hidden lg:flex text-muted-gray dark:text-gray-50 size-12 shrink-0 items-center justify-center hover:text-primary transition-colors"
+            aria-label="Home"
+          >
+            <span className="material-symbols-outlined text-2xl">home</span>
+          </Link>
         </div>
       </header>
     );

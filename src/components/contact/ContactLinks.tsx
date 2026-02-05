@@ -12,7 +12,7 @@ export function ContactLinks({ contact }: ContactLinksProps) {
         href={`mailto:${contact.email}`}
         className="group flex flex-col items-center"
       >
-        <p className="text-lg font-normal leading-normal tracking-wide transition-colors group-hover:text-primary">
+        <p className="text-lg font-normal leading-normal tracking-wide transition-colors group-hover:text-primary dark:text-white">
           {contact.email}
         </p>
         <span className="h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
@@ -24,7 +24,7 @@ export function ContactLinks({ contact }: ContactLinksProps) {
         rel="noopener noreferrer"
         className="group flex flex-col items-center"
       >
-        <p className="text-lg font-normal leading-normal tracking-wide transition-colors group-hover:text-primary">
+        <p className="text-lg font-normal leading-normal tracking-wide transition-colors group-hover:text-primary dark:text-white">
           {contact.socialHandle}
         </p>
         <span className="h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />

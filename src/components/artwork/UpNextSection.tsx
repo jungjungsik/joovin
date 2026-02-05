@@ -15,7 +15,7 @@ export function UpNextSection({ artwork }: UpNextSectionProps) {
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             {/* Label */}
-            <p className="text-xs font-bold uppercase tracking-widest text-gold-muted">
+            <p className="text-xs font-bold uppercase tracking-widest text-gold-muted dark:text-gray-400">
               Up Next
             </p>
 
@@ -26,7 +26,7 @@ export function UpNextSection({ artwork }: UpNextSectionProps) {
 
             {/* Subtitle */}
             {artwork.subtitle && (
-              <p className="text-sm text-gold-muted">
+              <p className="text-sm text-gold-muted dark:text-gray-400">
                 {artwork.subtitle}
               </p>
             )}

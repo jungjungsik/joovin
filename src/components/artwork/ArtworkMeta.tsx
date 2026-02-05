@@ -31,7 +31,7 @@ export function ArtworkMeta({
           <ArtworkTag label={subtitle} />
         )}
 
-        <p className="text-gold-muted text-sm tracking-wide">
+        <p className="text-gold-muted dark:text-gray-300 text-sm tracking-wide">
           {metaParts}
         </p>
       </div>

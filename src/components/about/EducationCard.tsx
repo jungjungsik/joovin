@@ -11,7 +11,7 @@ export function EducationCard({ school, graduationDate }: EducationCardProps) {
         <h4 className="font-bold text-sm uppercase tracking-wider text-gray-700 dark:text-gray-100">
           Education
         </h4>
-        <p className="text-lg font-medium">{school}</p>
+        <p className="text-lg font-medium dark:text-white">{school}</p>
         <p className="text-gray-700 dark:text-gray-100">
           Expected Graduation: {graduationDate}
         </p>

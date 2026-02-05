@@ -111,7 +111,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           {/* Footer */}
           <div className="px-4 py-4 border-t border-gray-300 dark:border-gray-700">
             <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
-              © 2024 Joovin NAM
+              © 2026 Joovin NAM · Dev by Jungsik Jung
             </p>
           </div>
         </div>
