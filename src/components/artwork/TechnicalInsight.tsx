@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 interface TechnicalInsightProps {
-  quote: string;
+  quote?: string;
   detailImage?: string;
 }
 
@@ -26,10 +26,12 @@ export function TechnicalInsight({ quote, detailImage }: TechnicalInsightProps) 
         Technical Insight
       </h3>
 
-      {/* Quote */}
-      <blockquote className="serif-text text-lg italic text-gray-800 dark:text-gray-50 leading-relaxed">
-        &ldquo;{quote}&rdquo;
-      </blockquote>
+      {/* Quote - only show if exists */}
+      {quote && (
+        <blockquote className="serif-text text-lg italic text-gray-800 dark:text-gray-50 leading-relaxed">
+          &ldquo;{quote}&rdquo;
+        </blockquote>
+      )}
     </section>
   );
 }
