@@ -5,15 +5,26 @@ interface EducationCardProps {
 
 export function EducationCard({ school, graduationDate }: EducationCardProps) {
   return (
-    <div className="mx-6 lg:mx-0 max-w-4xl lg:w-full lg:max-w-2xl xl:max-w-3xl lg:self-center bg-white/50 dark:bg-white/5 p-5 lg:p-6 xl:p-8 rounded-xl lg:rounded-2xl border border-gray-100 dark:border-gray-800 flex items-start gap-4 lg:gap-6">
-      <span className="material-symbols-outlined text-primary mt-1 text-2xl lg:text-3xl xl:text-4xl">school</span>
-      <div>
-        <h4 className="font-bold text-sm lg:text-base uppercase tracking-wider text-gray-700 dark:text-gray-100">
+    <div className="mx-6 lg:mx-auto max-w-xl lg:max-w-2xl">
+      <div className="relative bg-gradient-to-br from-primary/5 via-white to-primary/10 dark:from-primary/10 dark:via-gray-900 dark:to-primary/5 p-6 lg:p-8 xl:p-10 rounded-2xl lg:rounded-3xl border border-primary/20 shadow-lg shadow-primary/5 text-center">
+        {/* Icon */}
+        <div className="inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-primary/10 dark:bg-primary/20 mb-4 lg:mb-6">
+          <span className="material-symbols-outlined text-primary text-3xl lg:text-4xl">school</span>
+        </div>
+
+        {/* Label */}
+        <h4 className="font-bold text-xs lg:text-sm uppercase tracking-[0.2em] text-primary mb-3 lg:mb-4">
           Education
         </h4>
-        <p className="text-lg lg:text-xl xl:text-2xl font-medium dark:text-white">{school}</p>
-        <p className="text-gray-700 dark:text-gray-100 lg:text-lg">
-          Expected Graduation: {graduationDate}
+
+        {/* School Name */}
+        <p className="text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-900 dark:text-white mb-2 lg:mb-3 leading-tight">
+          {school}
+        </p>
+
+        {/* Graduation */}
+        <p className="text-sm lg:text-base text-gray-600 dark:text-gray-300">
+          Expected Graduation: <span className="font-medium text-gray-800 dark:text-gray-100">{graduationDate}</span>
         </p>
       </div>
     </div>
