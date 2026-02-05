@@ -99,8 +99,8 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
           />
         )}
 
-        {/* Technical Insight - Only if insight text exists */}
-        {artwork.technicalInsight && (
+        {/* Technical Insight - Show if text OR image exists */}
+        {(artwork.technicalInsight || artwork.technicalInsightImage) && (
           <TechnicalInsight
             quote={artwork.technicalInsight}
             detailImage={artwork.technicalInsightImage}

@@ -240,6 +240,12 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             />
           </div>
+          <ImageUploader
+            label="Studio Image"
+            description="Image of your workspace or working environment"
+            value={formData.studio_image}
+            onChange={(url) => updateField('studio_image', url)}
+          />
           <div>
             <label className="block text-sm font-medium mb-1 dark:text-white">Studio Description</label>
             <textarea
