@@ -7,9 +7,12 @@ interface ArtworkCardProps {
 }
 
 const tagLabels: Record<ItemTag, string> = {
-  "selected-works": "SELECTED WORKS",
+  "selected-works": "SELECTED",
+  "drawings": "DRAWINGS",
+  "paintings": "PAINTINGS",
+  "digital": "DIGITAL",
+  "wip": "WIP",
   "sketchbook": "SKETCHBOOK",
-  "process": "PROCESS",
 };
 
 export function ArtworkCard({ artwork }: ArtworkCardProps) {
