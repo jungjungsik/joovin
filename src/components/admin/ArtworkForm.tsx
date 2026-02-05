@@ -91,10 +91,10 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Basic Info */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Basic Information</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Basic Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium mb-1">Title *</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Title *</label>
             <input
               type="text"
               value={formData.title}
@@ -104,7 +104,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Subtitle</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Subtitle</label>
             <input
               type="text"
               value={formData.subtitle}
@@ -113,7 +113,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Year *</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Year *</label>
             <input
               type="number"
               value={formData.year}
@@ -123,7 +123,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Category *</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Category *</label>
             <select
               value={formData.tag}
               onChange={(e) => updateField('tag', e.target.value as ArtworkFormData['tag'])}
@@ -135,7 +135,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Season</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Season</label>
             <input
               type="text"
               value={formData.season}
@@ -145,7 +145,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Medium *</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Medium *</label>
             <input
               type="text"
               value={formData.medium}
@@ -156,7 +156,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Dimensions *</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Dimensions *</label>
             <input
               type="text"
               value={formData.dimensions}
@@ -167,7 +167,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium mb-1">Description *</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Description *</label>
             <textarea
               value={formData.description}
               onChange={(e) => updateField('description', e.target.value)}
@@ -181,7 +181,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
 
       {/* Images */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Images</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Images</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ImageUploader
             label="Thumbnail (1:1) *"
@@ -218,7 +218,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
 
       {/* Optional Details */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Additional Details (Optional)</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Additional Details (Optional)</h2>
         <div className="space-y-4">
           <ImageUploader
             label="Technique Detail Image (1:1)"
@@ -228,7 +228,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             aspectRatio="aspect-square"
           />
           <div>
-            <label className="block text-sm font-medium mb-1">Technique Description</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Technique Description</label>
             <textarea
               value={formData.technical_insight}
               onChange={(e) => updateField('technical_insight', e.target.value)}
@@ -238,7 +238,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Studio Description</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Studio Description</label>
             <textarea
               value={formData.studio_text}
               onChange={(e) => updateField('studio_text', e.target.value)}
@@ -248,7 +248,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Artist Reflection</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Artist Reflection</label>
             <textarea
               value={formData.reflection}
               onChange={(e) => updateField('reflection', e.target.value)}
@@ -262,7 +262,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
 
       {/* Settings */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Settings</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Settings</h2>
         <div className="flex items-center gap-6">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -271,10 +271,10 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
               onChange={(e) => updateField('featured', e.target.checked)}
               className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
             />
-            <span>Show on Homepage (Featured)</span>
+            <span className="dark:text-white">Show on Homepage (Featured)</span>
           </label>
           <div className="flex items-center gap-2">
-            <label className="text-sm">Sort Order:</label>
+            <label className="text-sm dark:text-white">Sort Order:</label>
             <input
               type="number"
               value={formData.sort_order}
@@ -297,7 +297,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors dark:text-white"
         >
           Cancel
         </button>

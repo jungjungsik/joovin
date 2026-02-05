@@ -118,7 +118,7 @@ export default function SettingsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-gray-500">Loading...</div>
+        <div className="text-gray-500 dark:text-gray-400">Loading...</div>
       </div>
     );
   }
@@ -126,7 +126,7 @@ export default function SettingsPage() {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-display font-semibold">Site Settings</h1>
+        <h1 className="text-2xl font-display font-semibold dark:text-white">Site Settings</h1>
         <button
           onClick={handleSave}
           disabled={saving}
@@ -138,10 +138,10 @@ export default function SettingsPage() {
 
       {/* Site Identity */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Site Identity</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Site Identity</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Site Name</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Site Name</label>
             <input
               type="text"
               value={settings.siteName}
@@ -150,7 +150,7 @@ export default function SettingsPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Artist Statement</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Artist Statement</label>
             <textarea
               value={settings.artistStatement}
               onChange={(e) => setSettings({ ...settings, artistStatement: e.target.value })}
@@ -164,10 +164,10 @@ export default function SettingsPage() {
 
       {/* Profile Info */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Profile Information</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Profile Information</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Name</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Name</label>
             <input
               type="text"
               value={settings.name}
@@ -177,7 +177,7 @@ export default function SettingsPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Title</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Title</label>
             <input
               type="text"
               value={settings.title}
@@ -187,7 +187,7 @@ export default function SettingsPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Class Year</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Class Year</label>
             <input
               type="text"
               value={settings.classYear}
@@ -201,10 +201,10 @@ export default function SettingsPage() {
 
       {/* Education */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Education</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Education</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">School</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">School</label>
             <input
               type="text"
               value={settings.school}
@@ -214,7 +214,7 @@ export default function SettingsPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Graduation Date</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Graduation Date</label>
             <input
               type="text"
               value={settings.graduationDate}
@@ -228,7 +228,7 @@ export default function SettingsPage() {
 
       {/* Creative Interests */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Creative Interests</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Creative Interests</h2>
         <TagInput
           label="Interests"
           description="Add creative interests, techniques, or areas of focus"
@@ -240,10 +240,10 @@ export default function SettingsPage() {
 
       {/* My Process */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">My Process</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">My Process</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Process Title</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Process Title</label>
             <input
               type="text"
               value={settings.processTitle}
@@ -263,9 +263,9 @@ export default function SettingsPage() {
 
       {/* Closing Quote */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Closing Quote</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Closing Quote</h2>
         <div>
-          <label className="block text-sm font-medium mb-1">Quote</label>
+          <label className="block text-sm font-medium mb-1 dark:text-white">Quote</label>
           <textarea
             value={settings.closingQuote}
             onChange={(e) => setSettings({ ...settings, closingQuote: e.target.value })}
@@ -278,7 +278,7 @@ export default function SettingsPage() {
 
       {/* Images */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Site Images</h2>
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Site Images</h2>
         <div className="space-y-6">
           <ImageUploader
             label="Home Hero Image"

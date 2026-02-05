@@ -32,7 +32,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
         <Link href="/" className="text-xl font-display font-semibold text-primary">
           Joovin NAM
         </Link>
-        <p className="text-xs text-gray-500 mt-1">Admin Panel</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Admin Panel</p>
       </div>
 
       <nav className="px-4">
@@ -53,7 +53,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       </nav>
 
       <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-700">
-        <div className="text-sm text-gray-500 mb-2 truncate">{user.email}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400 mb-2 truncate">{user.email}</div>
         <button
           onClick={handleLogout}
           className="flex items-center gap-2 text-gray-600 dark:text-white hover:text-red-500 transition-colors"

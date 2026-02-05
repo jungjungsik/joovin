@@ -112,9 +112,9 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
           />
         )}
 
-        {/* Reflective Text with CTA - Only if reflection exists */}
+        {/* Reflective Text - Only if reflection exists */}
         {artwork.reflection && (
-          <ReflectiveText text={artwork.reflection} ctaLabel="View Full Series" ctaHref="/portfolio" />
+          <ReflectiveText text={artwork.reflection} />
         )}
 
         {/* Back to Portfolio Button */}

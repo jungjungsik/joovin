@@ -22,7 +22,7 @@ export default async function EditArtworkPage({ params }: EditArtworkPageProps) 
 
   return (
     <div>
-      <h1 className="text-2xl font-display font-semibold mb-6">Edit Artwork</h1>
+      <h1 className="text-2xl font-display font-semibold mb-6 dark:text-white">Edit Artwork</h1>
       <ArtworkForm initialData={artwork} artworkId={id} />
     </div>
   )

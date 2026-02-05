@@ -34,7 +34,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center p-6">
       <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-display font-semibold text-center mb-8">
+        <h1 className="text-2xl font-display font-semibold text-center mb-8 dark:text-white">
           Admin Login
         </h1>
 
@@ -46,7 +46,7 @@ export default function LoginPage() {
           )}
 
           <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Email</label>
             <input
               type="email"
               value={email}
@@ -57,7 +57,7 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Password</label>
             <input
               type="password"
               value={password}

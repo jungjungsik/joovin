@@ -1,16 +1,8 @@
-import Link from "next/link";
-
 interface ReflectiveTextProps {
   text: string;
-  ctaLabel?: string;
-  ctaHref?: string;
 }
 
-export function ReflectiveText({
-  text,
-  ctaLabel = "View Full Series",
-  ctaHref = "/portfolio",
-}: ReflectiveTextProps) {
+export function ReflectiveText({ text }: ReflectiveTextProps) {
   return (
     <section className="px-6 lg:px-0 py-12 max-w-3xl mx-auto">
       <div className="flex flex-col items-center text-center space-y-8">
@@ -24,14 +16,6 @@ export function ReflectiveText({
         <p className="serif-text text-lg text-gray-800 dark:text-gray-50 leading-relaxed max-w-md italic">
           &ldquo;{text}&rdquo;
         </p>
-
-        {/* CTA Button */}
-        <Link
-          href={ctaHref}
-          className="px-8 py-3 bg-primary text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all duration-200"
-        >
-          {ctaLabel}
-        </Link>
       </div>
     </section>
   );

@@ -148,7 +148,7 @@ export function MultiTextArea({
       </div>
 
       {value.length === 0 && (
-        <div className="text-center py-12 text-gray-400 text-sm bg-gray-50 dark:bg-gray-900 rounded-xl border border-dashed border-gray-300 dark:border-gray-600">
+        <div className="text-center py-12 text-gray-400 dark:text-gray-500 text-sm bg-gray-50 dark:bg-gray-900 rounded-xl border border-dashed border-gray-300 dark:border-gray-600">
           <span className="material-symbols-outlined text-3xl mb-2 opacity-50 block">edit_note</span>
           Click the "Add Paragraph" button above to add text sections
         </div>

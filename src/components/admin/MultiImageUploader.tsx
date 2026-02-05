@@ -90,7 +90,7 @@ export function MultiImageUploader({
     <div>
       <div className="flex items-center justify-between mb-2">
         <div>
-          <label className="block text-sm font-medium">{label}</label>
+          <label className="block text-sm font-medium dark:text-white">{label}</label>
           {description && (
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{description}</p>
           )}
@@ -181,9 +181,9 @@ export function MultiImageUploader({
                     <div className="text-primary font-medium">Uploading...</div>
                   ) : (
                     <>
-                      <span className="material-symbols-outlined text-4xl text-gray-400 mb-2">cloud_upload</span>
+                      <span className="material-symbols-outlined text-4xl text-gray-400 dark:text-gray-500 mb-2">cloud_upload</span>
                       <span className="text-sm text-gray-500 dark:text-gray-400">Click to upload or drag</span>
-                      <span className="text-xs text-gray-400 mt-1">JPG, PNG, WebP</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500 mt-1">JPG, PNG, WebP</span>
                     </>
                   )}
                   <input
@@ -200,7 +200,7 @@ export function MultiImageUploader({
       </div>
 
       {value.length === 0 && (
-        <div className="text-center py-12 text-gray-400 text-sm">
+        <div className="text-center py-12 text-gray-400 dark:text-gray-500 text-sm">
           Click the "Add Image" button above to add images
         </div>
       )}

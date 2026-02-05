@@ -34,13 +34,13 @@ export default function AdminDashboard() {
   }
 
   if (loading) {
-    return <div className="text-center py-12">Loading...</div>
+    return <div className="text-center py-12 dark:text-white">Loading...</div>
   }
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-display font-semibold">Artwork Management</h1>
+        <h1 className="text-2xl font-display font-semibold dark:text-white">Artwork Management</h1>
         <Link
           href="/admin/artworks/new"
           className="bg-primary text-background-dark px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center gap-2"
@@ -51,7 +51,7 @@ export default function AdminDashboard() {
       </div>
 
       {artworks.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-gray-500 dark:text-gray-400">
           No artworks available.
         </div>
       ) : (
@@ -59,12 +59,12 @@ export default function AdminDashboard() {
           <table className="w-full">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">Image</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Title</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Tag</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Year</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Featured</th>
-                <th className="px-4 py-3 text-right text-sm font-medium">Actions</th>
+                <th className="px-4 py-3 text-left text-sm font-medium dark:text-white">Image</th>
+                <th className="px-4 py-3 text-left text-sm font-medium dark:text-white">Title</th>
+                <th className="px-4 py-3 text-left text-sm font-medium dark:text-white">Tag</th>
+                <th className="px-4 py-3 text-left text-sm font-medium dark:text-white">Year</th>
+                <th className="px-4 py-3 text-left text-sm font-medium dark:text-white">Featured</th>
+                <th className="px-4 py-3 text-right text-sm font-medium dark:text-white">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -80,13 +80,13 @@ export default function AdminDashboard() {
                       />
                     </div>
                   </td>
-                  <td className="px-4 py-3 font-medium">{artwork.title}</td>
+                  <td className="px-4 py-3 font-medium dark:text-white">{artwork.title}</td>
                   <td className="px-4 py-3">
                     <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
                       {artwork.tag}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-gray-500">{artwork.year}</td>
+                  <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{artwork.year}</td>
                   <td className="px-4 py-3">
                     {artwork.featured && (
                       <span className="material-symbols-outlined text-primary">star</span>

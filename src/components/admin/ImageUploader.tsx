@@ -56,7 +56,7 @@ export function ImageUploader({ value, onChange, label, description, aspectRatio
 
   return (
     <div>
-      <label className="block text-sm font-medium mb-1">{label}</label>
+      <label className="block text-sm font-medium mb-1 dark:text-white">{label}</label>
       {description && (
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{description}</p>
       )}
@@ -85,9 +85,9 @@ export function ImageUploader({ value, onChange, label, description, aspectRatio
               <div className="text-primary">Uploading...</div>
             ) : (
               <>
-                <span className="material-symbols-outlined text-4xl text-gray-400 mb-2">cloud_upload</span>
-                <span className="text-sm text-gray-500">Click or drag to upload</span>
-                <span className="text-xs text-gray-400 mt-1">JPG, PNG, WebP (Max 5MB)</span>
+                <span className="material-symbols-outlined text-4xl text-gray-400 dark:text-gray-500 mb-2">cloud_upload</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">Click or drag to upload</span>
+                <span className="text-xs text-gray-400 dark:text-gray-500 mt-1">JPG, PNG, WebP (Max 5MB)</span>
               </>
             )}
             <input
