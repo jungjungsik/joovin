@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ImageGallery } from "./ImageGallery";
+import { Lightbox } from "../ui/Lightbox";
 
 interface GenesisSectionProps {
   images: string[];
@@ -13,6 +14,17 @@ export function GenesisSection({ images, description }: GenesisSectionProps) {
   const [viewMode, setViewMode] = useState<"gallery" | "grid">(
     images.length > 4 ? "gallery" : "grid"
   );
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
 
   const toggleView = () => {
     setViewMode((prev) => (prev === "gallery" ? "grid" : "gallery"));
@@ -65,23 +77,35 @@ export function GenesisSection({ images, description }: GenesisSectionProps) {
 
         {/* Content: Gallery or Grid */}
         {viewMode === "gallery" && images.length > 4 ? (
-          <ImageGallery images={images} aspectRatio="aspect-[4/5]" />
+          <ImageGallery
+            images={images}
+            aspectRatio="aspect-[4/5]"
+            onImageClick={openLightbox}
+          />
         ) : (
           /* Process Images Grid */
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {images.map((src, index) => (
-              <div
+              <button
                 key={index}
-                className="relative aspect-[3/4] rounded-xl overflow-hidden ios-shadow"
+                onClick={() => openLightbox(index)}
+                className="relative aspect-[3/4] rounded-xl overflow-hidden ios-shadow cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label={`View process image ${index + 1} full screen`}
               >
                 <Image
                   src={src}
                   alt={`Process image ${index + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
-              </div>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    fullscreen
+                  </span>
+                </div>
+              </button>
             ))}
           </div>
         )}
@@ -93,6 +117,14 @@ export function GenesisSection({ images, description }: GenesisSectionProps) {
           </p>
         )}
       </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        images={images}
+        initialIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={closeLightbox}
+      />
     </section>
   );
 }

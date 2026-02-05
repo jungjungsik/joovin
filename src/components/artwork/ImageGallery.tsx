@@ -7,12 +7,14 @@ interface ImageGalleryProps {
   images: string[];
   title?: string;
   aspectRatio?: string;
+  onImageClick?: (index: number) => void;
 }
 
 export function ImageGallery({
   images,
   title,
   aspectRatio = "aspect-[4/5]",
+  onImageClick,
 }: ImageGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -107,11 +109,14 @@ export function ImageGallery({
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <div
-          className={`w-full h-full transition-opacity duration-300 ${
+        <button
+          onClick={() => onImageClick?.(currentIndex)}
+          className={`w-full h-full transition-opacity duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
             isTransitioning ? "opacity-0" : "opacity-100"
-          }`}
+          } ${onImageClick ? "group/image" : ""}`}
           style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
+          aria-label={`View image ${currentIndex + 1} full screen`}
+          disabled={!onImageClick}
         >
           <Image
             src={images[currentIndex]}
@@ -121,12 +126,20 @@ export function ImageGallery({
                 : `Image ${currentIndex + 1} of ${images.length}`
             }
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-300 group-hover/image:scale-105"
             sizes="(max-width: 768px) 100vw, 90vw"
             priority={currentIndex === 0}
             quality={90}
           />
-        </div>
+          {/* Hover overlay for clickable images */}
+          {onImageClick && (
+            <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+              <span className="material-symbols-outlined text-white text-4xl opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
+                fullscreen
+              </span>
+            </div>
+          )}
+        </button>
 
         {/* Navigation Arrows - Desktop Only */}
         {!isSingleImage && (
