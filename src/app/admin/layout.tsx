@@ -18,7 +18,7 @@ export default async function AdminLayout({
       {user ? (
         <div className="flex">
           <AdminSidebar user={user} />
-          <main className="flex-1 p-6 md:p-8 ml-0 md:ml-64">
+          <main className="flex-1 p-6 md:p-8 ml-0 md:ml-64 pt-20 md:pt-6">
             {children}
           </main>
         </div>
