@@ -43,11 +43,22 @@ export interface Profile {
   closingQuote: string;
 }
 
+// Social media URLs for multiple platforms
+export interface SocialLinks {
+  instagramUrl?: string;
+  tiktokUrl?: string;
+  youtubeUrl?: string;
+  twitterUrl?: string;
+  behanceUrl?: string;
+  pinterestUrl?: string;
+  linkedinUrl?: string;
+  facebookUrl?: string;
+}
+
 // Contact information
 export interface ContactInfo {
   email: string;
-  socialHandle: string;
-  socialUrl: string;
+  socialLinks: SocialLinks;
 }
 
 // Page header configuration

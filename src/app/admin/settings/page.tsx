@@ -37,8 +37,16 @@ interface SettingsData {
   // Contact Information
   contactHeadline: string;
   email: string;
-  socialHandle: string;
-  socialUrl: string;
+
+  // Social Media Links
+  instagramUrl: string;
+  tiktokUrl: string;
+  youtubeUrl: string;
+  twitterUrl: string;
+  behanceUrl: string;
+  pinterestUrl: string;
+  linkedinUrl: string;
+  facebookUrl: string;
 }
 
 export default function SettingsPage() {
@@ -75,8 +83,16 @@ export default function SettingsPage() {
     // Contact Information
     contactHeadline: "Let's talk art.",
     email: "",
-    socialHandle: "",
-    socialUrl: "",
+
+    // Social Media Links
+    instagramUrl: "",
+    tiktokUrl: "",
+    youtubeUrl: "",
+    twitterUrl: "",
+    behanceUrl: "",
+    pinterestUrl: "",
+    linkedinUrl: "",
+    facebookUrl: "",
   });
 
   useEffect(() => {
@@ -312,23 +328,93 @@ export default function SettingsPage() {
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             />
           </div>
+        </div>
+      </section>
+
+      {/* Social Media Links */}
+      <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Social Media Links</h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          Add links to your social media profiles. Only fill in the platforms you use.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1 dark:text-white">Social Handle</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Instagram</label>
             <input
-              type="text"
-              value={settings.socialHandle}
-              onChange={(e) => setSettings({ ...settings, socialHandle: e.target.value })}
-              placeholder="e.g., @joovin_art"
+              type="url"
+              value={settings.instagramUrl}
+              onChange={(e) => setSettings({ ...settings, instagramUrl: e.target.value })}
+              placeholder="https://instagram.com/username"
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1 dark:text-white">Social URL</label>
+            <label className="block text-sm font-medium mb-1 dark:text-white">TikTok</label>
             <input
               type="url"
-              value={settings.socialUrl}
-              onChange={(e) => setSettings({ ...settings, socialUrl: e.target.value })}
-              placeholder="https://instagram.com/joovin_art"
+              value={settings.tiktokUrl}
+              onChange={(e) => setSettings({ ...settings, tiktokUrl: e.target.value })}
+              placeholder="https://tiktok.com/@username"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">YouTube</label>
+            <input
+              type="url"
+              value={settings.youtubeUrl}
+              onChange={(e) => setSettings({ ...settings, youtubeUrl: e.target.value })}
+              placeholder="https://youtube.com/@channel"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Twitter / X</label>
+            <input
+              type="url"
+              value={settings.twitterUrl}
+              onChange={(e) => setSettings({ ...settings, twitterUrl: e.target.value })}
+              placeholder="https://x.com/username"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Behance</label>
+            <input
+              type="url"
+              value={settings.behanceUrl}
+              onChange={(e) => setSettings({ ...settings, behanceUrl: e.target.value })}
+              placeholder="https://behance.net/username"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Pinterest</label>
+            <input
+              type="url"
+              value={settings.pinterestUrl}
+              onChange={(e) => setSettings({ ...settings, pinterestUrl: e.target.value })}
+              placeholder="https://pinterest.com/username"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">LinkedIn</label>
+            <input
+              type="url"
+              value={settings.linkedinUrl}
+              onChange={(e) => setSettings({ ...settings, linkedinUrl: e.target.value })}
+              placeholder="https://linkedin.com/in/username"
+              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-white">Facebook</label>
+            <input
+              type="url"
+              value={settings.facebookUrl}
+              onChange={(e) => setSettings({ ...settings, facebookUrl: e.target.value })}
+              placeholder="https://facebook.com/username"
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
             />
           </div>
