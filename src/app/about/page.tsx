@@ -92,8 +92,8 @@ export default function AboutPage() {
           <InterestTags interests={profile.interests} />
         </div>
 
-        <div className="mt-6 px-6 text-center">
-          <p className="italic text-gray-700 dark:text-white custom-serif text-lg">
+        <div className="mt-6 px-6 text-center lg:px-12 max-w-4xl mx-auto">
+          <p className="italic text-gray-700 dark:text-white custom-serif text-lg lg:text-2xl xl:text-3xl leading-relaxed">
             "{profile.closingQuote}"
           </p>
         </div>
