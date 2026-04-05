@@ -30,7 +30,7 @@ export default function HomePage() {
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
       <PageHeader
-        variant={{ type: "home", title: "Joovin NAM", aboutLink: true }}
+        variant={{ type: "home", title: "JN Portfolio", aboutLink: true }}
       />
 
       <main className="flex flex-col flex-1">
