@@ -23,6 +23,7 @@ interface ArtworkFormData {
   studio_text?: string
   reflection?: string
   featured: boolean
+  published: boolean
   sort_order: number
 }
 
@@ -52,6 +53,7 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
     studio_text: initialData?.studio_text || '',
     reflection: initialData?.reflection || '',
     featured: initialData?.featured || false,
+    published: initialData?.published ?? true,
     sort_order: initialData?.sort_order || 0,
   })
 
@@ -277,7 +279,16 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
       {/* Settings */}
       <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
         <h2 className="text-lg font-semibold mb-4 dark:text-white">Settings</h2>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-6">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={formData.published}
+              onChange={(e) => updateField('published', e.target.checked)}
+              className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <span className="dark:text-white">Published (visible on the public site)</span>
+          </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"

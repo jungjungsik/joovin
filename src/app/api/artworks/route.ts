@@ -5,14 +5,28 @@ import { isAdminUser } from '@/lib/auth/admin'
 import { ALLOWED_ARTWORK_FIELDS, pickArtworkFields, generateUniqueSlug } from './_helpers'
 
 // GET /api/artworks - Get all artworks
+//
+// Admins see drafts; everyone else gets only published rows. The public site
+// reads through the server data layer (lib/data/artworks.server.ts) and
+// doesn't hit this endpoint, but we keep it open so existing admin tooling
+// keeps working.
 export async function GET() {
   const supabase = await createClient()
 
-  const { data, error } = await supabase
+  const { data: { user } } = await supabase.auth.getUser()
+  const isAdmin = isAdminUser(user)
+
+  let query = supabase
     .from('artworks')
     .select('*')
     .order('sort_order', { ascending: true })
     .order('created_at', { ascending: false })
+
+  if (!isAdmin) {
+    query = query.or('published.eq.true,published.is.null')
+  }
+
+  const { data, error } = await query
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

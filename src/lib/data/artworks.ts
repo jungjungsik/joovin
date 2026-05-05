@@ -22,6 +22,7 @@ interface ArtworkRow {
   studio_text?: string;
   reflection?: string;
   featured?: boolean;
+  published?: boolean;
   sort_order?: number;
   created_at?: string;
   updated_at?: string;
@@ -78,9 +79,15 @@ function transformArtwork(row: ArtworkRow): Artwork {
     studioText: nonEmpty(row.studio_text),
     reflection: nonEmpty(row.reflection),
     featured: row.featured,
+    published: row.published,
     order: row.sort_order,
   };
 }
+
+// Public read filter: hide drafts. Rows whose `published` column is null are
+// treated as published so the site keeps working before/during the
+// column-add migration.
+const PUBLISHED_FILTER = "published.eq.true,published.is.null";
 
 // Fetch all artworks from Supabase
 export async function getArtworks(): Promise<Artwork[]> {
@@ -88,6 +95,7 @@ export async function getArtworks(): Promise<Artwork[]> {
   const { data, error } = await supabase
     .from("artworks")
     .select("*")
+    .or(PUBLISHED_FILTER)
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: false });
 
@@ -106,7 +114,8 @@ export async function getArtworkBySlug(slug: string): Promise<Artwork | undefine
     .from("artworks")
     .select("*")
     .eq("slug", slug)
-    .single();
+    .or(PUBLISHED_FILTER)
+    .maybeSingle();
 
   if (error || !data) {
     return undefined;
@@ -122,6 +131,7 @@ export async function getFeaturedArtworks(): Promise<Artwork[]> {
     .from("artworks")
     .select("*")
     .eq("featured", true)
+    .or(PUBLISHED_FILTER)
     .order("sort_order", { ascending: true });
 
   if (error) {
@@ -136,7 +146,7 @@ export async function getFeaturedArtworks(): Promise<Artwork[]> {
 export async function getArtworksByTag(tag: string): Promise<Artwork[]> {
   const supabase = createClient();
 
-  let query = supabase.from("artworks").select("*");
+  let query = supabase.from("artworks").select("*").or(PUBLISHED_FILTER);
 
   if (tag !== "all") {
     query = query.eq("tag", tag);
@@ -165,12 +175,13 @@ export async function getAdjacentArtworks(slug: string): Promise<{ prev?: Artwor
   };
 }
 
-// Get all slugs for static generation
+// Get all slugs for static generation (published only)
 export async function getAllSlugs(): Promise<string[]> {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("artworks")
-    .select("slug");
+    .select("slug")
+    .or(PUBLISHED_FILTER);
 
   if (error) {
     console.error("Error fetching slugs:", error);

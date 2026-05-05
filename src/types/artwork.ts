@@ -25,6 +25,7 @@ export interface Artwork {
   studioText?: string;
   reflection?: string;
   featured?: boolean;
+  published?: boolean;
   order?: number;
 }
 

@@ -11,6 +11,7 @@ interface Artwork {
   tag: string
   year: number
   featured: boolean
+  published?: boolean
 }
 
 export default function AdminDashboard() {
@@ -80,7 +81,16 @@ export default function AdminDashboard() {
                       />
                     </div>
                   </td>
-                  <td className="px-4 py-3 font-medium dark:text-white">{artwork.title}</td>
+                  <td className="px-4 py-3 font-medium dark:text-white">
+                    <span className="flex items-center gap-2">
+                      {artwork.title}
+                      {artwork.published === false && (
+                        <span className="px-2 py-0.5 text-[10px] uppercase tracking-wider rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
+                          Draft
+                        </span>
+                      )}
+                    </span>
+                  </td>
                   <td className="px-4 py-3">
                     <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
                       {artwork.tag}

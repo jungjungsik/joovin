@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { getArtworksServer } from "@/lib/data/artworks.server";
+import { getSiteUrl } from "@/lib/siteUrl";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://joovin.vercel.app";
+  const baseUrl = getSiteUrl();
   const artworks = await getArtworksServer();
 
   const artworkUrls = artworks.map((artwork) => ({

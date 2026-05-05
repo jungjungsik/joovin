@@ -20,6 +20,7 @@ export const ALLOWED_ARTWORK_FIELDS = [
   'studio_text',
   'reflection',
   'featured',
+  'published',
   'sort_order',
 ] as const
 

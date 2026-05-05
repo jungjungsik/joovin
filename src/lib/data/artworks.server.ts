@@ -24,6 +24,7 @@ interface ArtworkRow {
   studio_text?: string;
   reflection?: string;
   featured?: boolean;
+  published?: boolean;
   sort_order?: number;
   created_at?: string;
   updated_at?: string;
@@ -82,6 +83,7 @@ function transformArtwork(row: ArtworkRow): Artwork & { updatedAt?: string } {
     studioText: nonEmpty(row.studio_text),
     reflection: nonEmpty(row.reflection),
     featured: row.featured,
+    published: row.published,
     order: row.sort_order,
     updatedAt: row.updated_at,
   };
@@ -89,9 +91,13 @@ function transformArtwork(row: ArtworkRow): Artwork & { updatedAt?: string } {
 
 export async function getArtworksServer(): Promise<Array<Artwork & { updatedAt?: string }>> {
   const supabase = getAnonClient();
+  // Public read path: drafts (published=false) are hidden. Rows with a
+  // null published column are treated as published so the site keeps working
+  // before/during the column-add migration.
   const { data, error } = await supabase
     .from("artworks")
     .select("*")
+    .or("published.eq.true,published.is.null")
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: false });
 
@@ -108,6 +114,7 @@ export async function getFeaturedArtworksServer(): Promise<Artwork[]> {
     .from("artworks")
     .select("*")
     .eq("featured", true)
+    .or("published.eq.true,published.is.null")
     .order("sort_order", { ascending: true });
 
   if (error) {

@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Work_Sans, Lora } from "next/font/google";
+import { getSiteUrl } from "@/lib/siteUrl";
 import "./globals.css";
+
+const siteUrl = getSiteUrl();
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -29,7 +32,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://joovin.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Joovin NAM | Art Portfolio",
     template: "%s | Joovin NAM Portfolio",
@@ -41,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://joovin.vercel.app",
+    url: siteUrl,
     siteName: "Joovin NAM Portfolio",
     title: "Joovin NAM | Art Portfolio",
     description: "High school art student portfolio showcasing paintings, drawings, and mixed media works.",
