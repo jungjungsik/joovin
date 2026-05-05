@@ -40,8 +40,24 @@ function normalizeTag(tag: string): ItemTag {
   return TAG_MAPPING[tag] || 'sketchbook'; // Default fallback
 }
 
+// Drop empty / non-string entries that may have been persisted by older
+// versions of the admin form (e.g. an "Add Image" slot saved without an upload).
+function cleanUrlList(list?: string[]): string[] | undefined {
+  if (!list) return undefined;
+  const filtered = list.filter((u): u is string => typeof u === "string" && u.length > 0);
+  return filtered.length > 0 ? filtered : undefined;
+}
+
+function nonEmpty(value: string | undefined | null): string | undefined {
+  return typeof value === "string" && value.length > 0 ? value : undefined;
+}
+
 // Transform database row to frontend type
 function transformArtwork(row: ArtworkRow): Artwork {
+  // Fall back to thumbnail when hero is missing so the detail page never
+  // hands an empty src to next/image.
+  const heroImage = nonEmpty(row.hero_image) ?? row.thumbnail;
+
   return {
     id: row.id,
     slug: row.slug,
@@ -54,13 +70,13 @@ function transformArtwork(row: ArtworkRow): Artwork {
     season: row.season,
     description: row.description,
     thumbnail: row.thumbnail,
-    heroImage: row.hero_image,
-    processImages: row.process_images,
-    technicalInsight: row.technical_insight,
-    technicalInsightImage: row.technical_insight_image,
-    studioImage: row.studio_image,
-    studioText: row.studio_text,
-    reflection: row.reflection,
+    heroImage,
+    processImages: cleanUrlList(row.process_images),
+    technicalInsight: nonEmpty(row.technical_insight),
+    technicalInsightImage: nonEmpty(row.technical_insight_image),
+    studioImage: nonEmpty(row.studio_image),
+    studioText: nonEmpty(row.studio_text),
+    reflection: nonEmpty(row.reflection),
     featured: row.featured,
     order: row.sort_order,
   };
