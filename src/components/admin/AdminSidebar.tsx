@@ -9,9 +9,10 @@ import type { User } from '@supabase/supabase-js'
 
 interface AdminSidebarProps {
   user: User
+  siteName?: string
 }
 
-export function AdminSidebar({ user }: AdminSidebarProps) {
+export function AdminSidebar({ user, siteName = 'Admin' }: AdminSidebarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
@@ -93,7 +94,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
         <div className="p-6 flex items-center justify-between">
           <div>
             <Link href="/" className="text-xl font-display font-semibold text-primary">
-              Joovin NAM
+              {siteName}
             </Link>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Admin Panel</p>
           </div>

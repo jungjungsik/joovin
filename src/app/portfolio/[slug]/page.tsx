@@ -101,10 +101,7 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
 
         {/* Genesis Section - Only if process images exist */}
         {artwork.processImages && artwork.processImages.length > 0 && (
-          <GenesisSection
-            images={artwork.processImages}
-            description="Initial sketches and compositional studies exploring the relationship between form and negative space."
-          />
+          <GenesisSection images={artwork.processImages} />
         )}
 
         {/* Technical Insight - Show if text OR image exists */}

@@ -18,9 +18,8 @@ export function HomeFooter() {
         await navigator.clipboard.writeText(window.location.href);
         alert("Link copied to clipboard!");
       }
-    } catch (err) {
-      // User cancelled or error
-      console.log("Share cancelled or failed");
+    } catch {
+      // User cancelled or error - silent
     }
   };
 

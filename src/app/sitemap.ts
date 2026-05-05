@@ -1,13 +1,16 @@
 import { MetadataRoute } from "next";
-import { getArtworks } from "@/lib/data/artworks";
+import { getArtworksServer } from "@/lib/data/artworks.server";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://joovin.vercel.app";
-  const artworks = await getArtworks();
+  const artworks = await getArtworksServer();
 
   const artworkUrls = artworks.map((artwork) => ({
     url: `${baseUrl}/portfolio/${artwork.slug}`,
-    lastModified: new Date(),
+    // Use the row's updated_at when available so search engines only re-crawl
+    // entries that actually changed — falling back to the build time keeps
+    // freshly-imported rows visible.
+    lastModified: artwork.updatedAt ? new Date(artwork.updatedAt) : new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));

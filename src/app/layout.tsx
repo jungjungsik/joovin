@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Work_Sans, Lora } from "next/font/google";
-import { ThemeProvider } from "@/providers/ThemeProvider";
 import "./globals.css";
 
 const workSans = Work_Sans({
@@ -91,7 +90,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background-light dark:bg-background-dark font-display text-muted-gray dark:text-gray-50 min-h-screen">
-        <ThemeProvider>{children}</ThemeProvider>
+        {children}
       </body>
     </html>
   );
