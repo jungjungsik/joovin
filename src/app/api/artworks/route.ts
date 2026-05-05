@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { ALLOWED_ARTWORK_FIELDS, pickArtworkFields, generateUniqueSlug } from './_helpers'
 
 // GET /api/artworks - Get all artworks
 export async function GET() {
@@ -29,16 +30,17 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json()
+  const payload = pickArtworkFields(body, ALLOWED_ARTWORK_FIELDS)
 
-  // Generate slug from title
-  const slug = body.title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
+  if (!payload.title || typeof payload.title !== 'string') {
+    return NextResponse.json({ error: 'Title is required' }, { status: 400 })
+  }
+
+  const slug = await generateUniqueSlug(supabase, payload.title as string)
 
   const { data, error } = await supabase
     .from('artworks')
-    .insert({ ...body, slug })
+    .insert({ ...payload, slug })
     .select()
     .single()
 

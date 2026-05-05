@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useCallback } from 'react'
-import Image from 'next/image'
 
 interface MultiImageUploaderProps {
   value: string[]
@@ -150,32 +149,39 @@ export function MultiImageUploader({
             </div>
 
             {/* Image Upload Area */}
-            <div
-              onDragOver={(e) => { e.preventDefault(); setDragOverIndex(index) }}
-              onDragLeave={() => setDragOverIndex(null)}
-              onDrop={(e) => handleDrop(e, index)}
-              className={`relative border-2 border-dashed rounded-xl overflow-hidden transition-colors aspect-square ${
-                dragOverIndex === index
-                  ? 'border-primary bg-primary/5'
-                  : 'border-gray-300 dark:border-gray-600'
-              }`}
-            >
-              {url ? (
-                <div className="relative w-full h-full">
-                  <Image src={url} alt={`Image ${index + 1}`} fill className="object-cover" />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const newUrls = [...value]
-                      newUrls[index] = ''
-                      onChange(newUrls)
-                    }}
-                    className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-lg">close</span>
-                  </button>
-                </div>
-              ) : (
+            {url ? (
+              <div className="relative rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+                {/* Native <img> preserves the file's natural aspect ratio. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={url}
+                  alt={`Image ${index + 1}`}
+                  className="block max-w-full h-auto max-h-[50vh] w-auto mx-auto"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newUrls = [...value]
+                    newUrls[index] = ''
+                    onChange(newUrls)
+                  }}
+                  className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition-colors"
+                  aria-label="Remove image"
+                >
+                  <span className="material-symbols-outlined text-lg">close</span>
+                </button>
+              </div>
+            ) : (
+              <div
+                onDragOver={(e) => { e.preventDefault(); setDragOverIndex(index) }}
+                onDragLeave={() => setDragOverIndex(null)}
+                onDrop={(e) => handleDrop(e, index)}
+                className={`relative border-2 border-dashed rounded-xl overflow-hidden transition-colors min-h-[200px] ${
+                  dragOverIndex === index
+                    ? 'border-primary bg-primary/5'
+                    : 'border-gray-300 dark:border-gray-600'
+                }`}
+              >
                 <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                   {uploadingIndex === index ? (
                     <div className="text-primary font-medium">Uploading...</div>
@@ -188,20 +194,20 @@ export function MultiImageUploader({
                   )}
                   <input
                     type="file"
-                    accept="image/jpeg,image/png,image/webp"
+                    accept="image/jpeg,image/png,image/webp,image/x-png"
                     onChange={(e) => handleFileSelect(e, index)}
                     className="hidden"
                   />
                 </label>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
 
       {value.length === 0 && (
         <div className="text-center py-12 text-gray-400 dark:text-gray-500 text-sm">
-          Click the "Add Image" button above to add images
+          Click the &quot;Add Image&quot; button above to add images
         </div>
       )}
 

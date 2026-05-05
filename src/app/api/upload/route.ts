@@ -2,6 +2,50 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { uploadToR2 } from '@/lib/r2/client'
 
+const MAX_FILE_BYTES = 15 * 1024 * 1024 // 15MB
+// Some browsers (notably IE-era Windows uploads) report PNG as "image/x-png".
+// Magic-bytes validation below is the source of truth, so we accept the
+// alias to avoid rejecting legitimate PNGs at the header check.
+const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/x-png', 'image/webp'] as const
+
+// Detect actual image type from the first bytes of the buffer.
+// Returns the canonical mime+extension or null if the file is not a supported image.
+function detectImageType(buf: Buffer): { mime: (typeof ALLOWED_MIME)[number]; ext: 'jpg' | 'png' | 'webp' } | null {
+  if (buf.length < 12) return null
+
+  // JPEG: FF D8 FF
+  if (buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) {
+    return { mime: 'image/jpeg', ext: 'jpg' }
+  }
+  // PNG: 89 50 4E 47 0D 0A 1A 0A
+  if (
+    buf[0] === 0x89 &&
+    buf[1] === 0x50 &&
+    buf[2] === 0x4e &&
+    buf[3] === 0x47 &&
+    buf[4] === 0x0d &&
+    buf[5] === 0x0a &&
+    buf[6] === 0x1a &&
+    buf[7] === 0x0a
+  ) {
+    return { mime: 'image/png', ext: 'png' }
+  }
+  // WebP: "RIFF" .... "WEBP"
+  if (
+    buf[0] === 0x52 &&
+    buf[1] === 0x49 &&
+    buf[2] === 0x46 &&
+    buf[3] === 0x46 &&
+    buf[8] === 0x57 &&
+    buf[9] === 0x45 &&
+    buf[10] === 0x42 &&
+    buf[11] === 0x50
+  ) {
+    return { mime: 'image/webp', ext: 'webp' }
+  }
+  return null
+}
+
 export async function POST(request: NextRequest) {
   const supabase = await createClient()
 
@@ -17,21 +61,29 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'No file provided' }, { status: 400 })
   }
 
-  // Validate file type
-  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
-  if (!allowedTypes.includes(file.type)) {
+  // Cheap up-front filters using the headers the browser sent.
+  if (!ALLOWED_MIME.includes(file.type as (typeof ALLOWED_MIME)[number])) {
     return NextResponse.json({ error: 'Invalid file type. Use JPG, PNG, or WebP' }, { status: 400 })
   }
-
-  // Validate file size (max 5MB)
-  const maxSize = 5 * 1024 * 1024
-  if (file.size > maxSize) {
-    return NextResponse.json({ error: 'File too large. Max 5MB' }, { status: 400 })
+  if (file.size > MAX_FILE_BYTES) {
+    return NextResponse.json({ error: 'File too large. Max 15MB' }, { status: 400 })
   }
 
   try {
     const buffer = Buffer.from(await file.arrayBuffer())
-    const url = await uploadToR2(buffer, file.name, file.type)
+
+    // Trust the file's magic bytes, not the client-supplied MIME header.
+    const detected = detectImageType(buffer)
+    if (!detected) {
+      return NextResponse.json({ error: 'File content is not a valid JPG, PNG, or WebP image' }, { status: 400 })
+    }
+
+    // Re-check size against actual buffer in case the multipart layer was lenient.
+    if (buffer.length > MAX_FILE_BYTES) {
+      return NextResponse.json({ error: 'File too large. Max 15MB' }, { status: 400 })
+    }
+
+    const url = await uploadToR2(buffer, `upload.${detected.ext}`, detected.mime)
 
     return NextResponse.json({ url })
   } catch (error) {

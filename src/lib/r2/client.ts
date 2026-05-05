@@ -31,7 +31,11 @@ export async function uploadToR2(
 }
 
 export async function deleteFromR2(url: string): Promise<void> {
-  const key = url.replace(`${process.env.R2_PUBLIC_URL}/`, '')
+  const publicUrl = process.env.R2_PUBLIC_URL
+  if (!publicUrl || !url || !url.startsWith(publicUrl)) return
+
+  const key = url.replace(`${publicUrl}/`, '')
+  if (!key) return
 
   await s3Client.send(
     new DeleteObjectCommand({
@@ -39,4 +43,21 @@ export async function deleteFromR2(url: string): Promise<void> {
       Key: key,
     })
   )
+}
+
+// Best-effort batch delete; never throws. Returns count of successful deletes.
+export async function deleteManyFromR2(urls: (string | null | undefined)[]): Promise<number> {
+  const targets = urls.filter((u): u is string => typeof u === 'string' && u.length > 0)
+  let ok = 0
+  await Promise.all(
+    targets.map(async (url) => {
+      try {
+        await deleteFromR2(url)
+        ok++
+      } catch (err) {
+        console.error('R2 delete failed:', url, err)
+      }
+    })
+  )
+  return ok
 }

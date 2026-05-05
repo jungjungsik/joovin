@@ -62,11 +62,17 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
     const url = artworkId ? `/api/artworks/${artworkId}` : '/api/artworks'
     const method = artworkId ? 'PUT' : 'POST'
 
+    // Drop empty image slots created by "Add Image" without an upload.
+    const cleanedPayload = {
+      ...formData,
+      process_images: (formData.process_images || []).filter((u) => typeof u === 'string' && u.length > 0),
+    }
+
     try {
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(cleanedPayload),
       })
 
       if (res.ok) {
@@ -117,7 +123,10 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             <input
               type="number"
               value={formData.year}
-              onChange={(e) => updateField('year', parseInt(e.target.value))}
+              onChange={(e) => {
+                const parsed = parseInt(e.target.value, 10)
+                updateField('year', Number.isFinite(parsed) ? parsed : new Date().getFullYear())
+              }}
               className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
               required
             />
@@ -187,25 +196,22 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
         <h2 className="text-lg font-semibold mb-4 dark:text-white">Images</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ImageUploader
-            label="Thumbnail (1:1) *"
-            description="Square image displayed in the portfolio list. Ensure the full artwork is clearly visible."
+            label="Thumbnail *"
+            description="Image displayed in the portfolio list. The original aspect ratio is preserved."
             value={formData.thumbnail}
             onChange={(url) => updateField('thumbnail', url)}
-            aspectRatio="aspect-square"
           />
           <ImageUploader
-            label="Hero Image (4:5) *"
-            description="Main image displayed prominently at the top of the artwork detail page. Choose a portrait-oriented photo that best showcases your work."
+            label="Hero Image *"
+            description="Main image at the top of the artwork detail page. Any aspect ratio is allowed; the original is preserved."
             value={formData.hero_image}
             onChange={(url) => updateField('hero_image', url)}
-            aspectRatio="aspect-[4/5]"
           />
           <ImageUploader
-            label="Studio Image (16:9)"
-            description="Landscape image showing your studio or working environment. Convey the atmosphere of the space where your artwork was created."
+            label="Studio Image"
+            description="Image of your studio or working environment. Any aspect ratio is allowed."
             value={formData.studio_image}
             onChange={(url) => updateField('studio_image', url)}
-            aspectRatio="aspect-video"
           />
           <div className="md:col-span-2">
             <MultiImageUploader
@@ -224,11 +230,10 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
         <h2 className="text-lg font-semibold mb-4 dark:text-white">Additional Details (Optional)</h2>
         <div className="space-y-4">
           <ImageUploader
-            label="Technique Detail Image (1:1)"
-            description="Square close-up image showing brushwork, texture, and detailed techniques. Capture sections that emphasize technical characteristics."
+            label="Technique Detail Image"
+            description="Close-up image showing brushwork, texture, or detailed techniques. Any aspect ratio is allowed."
             value={formData.technical_insight_image}
             onChange={(url) => updateField('technical_insight_image', url)}
-            aspectRatio="aspect-square"
           />
           <div>
             <label className="block text-sm font-medium mb-1 dark:text-white">Technique Description</label>

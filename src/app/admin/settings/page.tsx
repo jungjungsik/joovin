@@ -427,10 +427,9 @@ export default function SettingsPage() {
         <div className="space-y-6">
           <ImageUploader
             label="Home Hero Image"
-            description="Main hero image displayed on the home page. Use a 4:5 portrait image."
+            description="Main hero image displayed on the home page. Any aspect ratio is allowed; the original is preserved."
             value={settings.homeHeroImage}
             onChange={(url) => setSettings({ ...settings, homeHeroImage: url })}
-            aspectRatio="aspect-[4/5]"
           />
           <MultiImageUploader
             label="Profile Images"

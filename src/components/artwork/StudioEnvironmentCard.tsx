@@ -28,12 +28,12 @@ export function StudioEnvironmentCard({
         </div>
 
         {/* Studio Image */}
-        <div className="relative aspect-video rounded-xl overflow-hidden">
+        <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100 dark:bg-[#0f0d08]">
           <Image
             src={image}
             alt="Studio environment"
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 768px) 100vw, 896px"
           />
         </div>

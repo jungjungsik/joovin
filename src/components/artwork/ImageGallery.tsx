@@ -14,6 +14,8 @@ export function ImageGallery({
   images,
   title,
   aspectRatio = "aspect-[4/5]",
+  // ↑ kept for callers that opt-in to a fixed frame; default behaviour now
+  //   preserves the image's natural aspect ratio via object-contain.
   onImageClick,
 }: ImageGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -104,7 +106,7 @@ export function ImageGallery({
     <div className="relative w-full group" ref={containerRef}>
       {/* Main Image Container */}
       <div
-        className={`relative w-full ${aspectRatio} rounded-xl overflow-hidden ios-shadow`}
+        className={`relative w-full ${aspectRatio} rounded-xl overflow-hidden ios-shadow bg-gray-50 dark:bg-[#1a170e]`}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -126,7 +128,7 @@ export function ImageGallery({
                 : `Image ${currentIndex + 1} of ${images.length}`
             }
             fill
-            className="object-cover transition-transform duration-300 group-hover/image:scale-105"
+            className="object-contain transition-transform duration-300 group-hover/image:scale-105"
             sizes="(max-width: 768px) 100vw, 90vw"
             priority={currentIndex === 0}
             quality={90}

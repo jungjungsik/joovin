@@ -7,13 +7,13 @@ interface ArtworkHeroProps {
 
 export function ArtworkHero({ src, alt }: ArtworkHeroProps) {
   return (
-    <section className="relative w-full min-h-[500px] lg:max-h-[80vh] overflow-hidden">
+    <section className="relative w-full min-h-[500px] lg:max-h-[80vh] overflow-hidden bg-gray-50 dark:bg-[#1a170e]">
       <div className="max-w-6xl mx-auto relative w-full h-full min-h-[500px] lg:max-h-[80vh]">
         <Image
           src={src}
           alt={alt}
           fill
-          className="object-cover"
+          className="object-contain"
           priority
           sizes="(max-width: 1024px) 100vw, 1152px"
         />

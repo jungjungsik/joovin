@@ -10,12 +10,12 @@ export function TechnicalInsight({ quote, detailImage }: TechnicalInsightProps) 
     <section className="px-6 lg:px-0 py-10 max-w-4xl mx-auto space-y-6">
       {/* Detail Image */}
       {detailImage && (
-        <div className="relative aspect-square lg:max-w-2xl lg:mx-auto rounded-xl overflow-hidden ios-shadow">
+        <div className="relative aspect-square lg:max-w-2xl lg:mx-auto rounded-xl overflow-hidden ios-shadow bg-gray-50 dark:bg-[#1a170e]">
           <Image
             src={detailImage}
             alt="Technical detail of the artwork"
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 768px) 100vw, 672px"
           />
         </div>
