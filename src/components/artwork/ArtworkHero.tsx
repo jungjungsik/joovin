@@ -3,9 +3,10 @@ import Image from "next/image";
 interface ArtworkHeroProps {
   src: string;
   alt: string;
+  blurDataURL?: string;
 }
 
-export function ArtworkHero({ src, alt }: ArtworkHeroProps) {
+export function ArtworkHero({ src, alt, blurDataURL }: ArtworkHeroProps) {
   // Bail out cleanly if the row has no usable image. next/image throws on an
   // empty src; the data layer normally falls back to thumbnail, but guarding
   // here keeps the page from crashing if both fields end up empty.
@@ -30,6 +31,9 @@ export function ArtworkHero({ src, alt }: ArtworkHeroProps) {
           className="object-contain"
           priority
           sizes="(max-width: 1024px) 100vw, 1152px"
+          {...(blurDataURL
+            ? { placeholder: "blur" as const, blurDataURL }
+            : {})}
         />
         {/* Gradient overlay for text legibility */}
         <div

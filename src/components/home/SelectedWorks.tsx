@@ -30,6 +30,9 @@ export function SelectedWorks({ artworks = [] }: SelectedWorksProps) {
                 alt={artwork.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
+                {...(artwork.thumbnailBlur
+                  ? { placeholder: "blur" as const, blurDataURL: artwork.thumbnailBlur }
+                  : {})}
               />
             </div>
             <div className="flex flex-col items-center">

@@ -1,8 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
+import sharp from 'sharp'
 import { createClient } from '@/lib/supabase/server'
 import { uploadToR2 } from '@/lib/r2/client'
 import { stripJpegExif } from '@/lib/r2/exifStrip'
 import { isAdminUser } from '@/lib/auth/admin'
+
+// Generate a tiny base64 JPEG suitable for next/image's blur placeholder.
+// Falls through silently — blur is a UX nicety, not load-bearing.
+async function generateBlurDataURL(buffer: Buffer): Promise<string | null> {
+  try {
+    const blur = await sharp(buffer)
+      .resize(16, 16, { fit: 'inside' })
+      .jpeg({ quality: 30 })
+      .toBuffer()
+    return `data:image/jpeg;base64,${blur.toString('base64')}`
+  } catch (err) {
+    console.error('Blur generation failed:', err)
+    return null
+  }
+}
 
 const MAX_FILE_BYTES = 15 * 1024 * 1024 // 15MB
 // Some browsers (notably IE-era Windows uploads) report PNG as "image/x-png".
@@ -93,9 +109,12 @@ export async function POST(request: NextRequest) {
     const sanitized =
       detected.mime === 'image/jpeg' ? stripJpegExif(buffer) : buffer
 
-    const url = await uploadToR2(sanitized, `upload.${detected.ext}`, detected.mime)
+    const [url, blurDataURL] = await Promise.all([
+      uploadToR2(sanitized, `upload.${detected.ext}`, detected.mime),
+      generateBlurDataURL(sanitized),
+    ])
 
-    return NextResponse.json({ url })
+    return NextResponse.json({ url, blurDataURL })
   } catch (error) {
     console.error('Upload error:', error)
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 })

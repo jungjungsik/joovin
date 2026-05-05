@@ -17,7 +17,9 @@ export interface Artwork {
   season?: string;
   description: string;
   thumbnail: string;
+  thumbnailBlur?: string;
   heroImage: string;
+  heroBlur?: string;
   processImages?: string[];
   technicalInsight?: string;
   technicalInsightImage?: string;

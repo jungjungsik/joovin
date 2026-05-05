@@ -27,6 +27,9 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
           alt={artwork.title}
           fill
           className="object-contain group-hover:scale-105 transition-transform duration-300"
+          {...(artwork.thumbnailBlur
+            ? { placeholder: "blur" as const, blurDataURL: artwork.thumbnailBlur }
+            : {})}
         />
       </div>
       <div className="mt-3 text-center">

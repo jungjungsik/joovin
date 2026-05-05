@@ -14,7 +14,9 @@ interface ArtworkRow {
   season?: string;
   description: string;
   thumbnail: string;
+  thumbnail_blur?: string;
   hero_image: string;
+  hero_blur?: string;
   process_images?: string[];
   technical_insight?: string;
   technical_insight_image?: string;
@@ -71,7 +73,9 @@ function transformArtwork(row: ArtworkRow): Artwork {
     season: row.season,
     description: row.description,
     thumbnail: row.thumbnail,
+    thumbnailBlur: nonEmpty(row.thumbnail_blur),
     heroImage,
+    heroBlur: nonEmpty(row.hero_blur) ?? nonEmpty(row.thumbnail_blur),
     processImages: cleanUrlList(row.process_images),
     technicalInsight: nonEmpty(row.technical_insight),
     technicalInsightImage: nonEmpty(row.technical_insight_image),

@@ -15,7 +15,9 @@ interface ArtworkFormData {
   season?: string
   description: string
   thumbnail: string
+  thumbnail_blur?: string
   hero_image: string
+  hero_blur?: string
   process_images?: string[]
   technical_insight?: string
   technical_insight_image?: string
@@ -45,7 +47,9 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
     season: initialData?.season || '',
     description: initialData?.description || '',
     thumbnail: initialData?.thumbnail || '',
+    thumbnail_blur: initialData?.thumbnail_blur || '',
     hero_image: initialData?.hero_image || '',
+    hero_blur: initialData?.hero_blur || '',
     process_images: initialData?.process_images || [],
     technical_insight: initialData?.technical_insight || '',
     technical_insight_image: initialData?.technical_insight_image || '',
@@ -202,12 +206,14 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
             description="Image displayed in the portfolio list. The original aspect ratio is preserved."
             value={formData.thumbnail}
             onChange={(url) => updateField('thumbnail', url)}
+            onChangeBlur={(blur) => updateField('thumbnail_blur', blur)}
           />
           <ImageUploader
             label="Hero Image *"
             description="Main image at the top of the artwork detail page. Any aspect ratio is allowed; the original is preserved."
             value={formData.hero_image}
             onChange={(url) => updateField('hero_image', url)}
+            onChangeBlur={(blur) => updateField('hero_blur', blur)}
           />
           <ImageUploader
             label="Studio Image"

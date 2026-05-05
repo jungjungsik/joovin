@@ -85,7 +85,11 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
 
       <main className="flex flex-col flex-1 pb-24">
         {/* Hero Image */}
-        <ArtworkHero src={artwork.heroImage} alt={artwork.title} />
+        <ArtworkHero
+          src={artwork.heroImage}
+          alt={artwork.title}
+          blurDataURL={artwork.heroBlur}
+        />
 
         {/* Title, Tag, and Meta Info */}
         <ArtworkMeta

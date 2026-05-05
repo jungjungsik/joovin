@@ -6,11 +6,14 @@ import { compressImage } from '@/lib/utils/imageCompress'
 interface ImageUploaderProps {
   value?: string
   onChange: (url: string) => void
+  // Receives the tiny base64 blur placeholder when /api/upload returns one.
+  // Optional — only callers that store blur (e.g. thumbnail/hero) wire it.
+  onChangeBlur?: (blurDataURL: string) => void
   label: string
   description?: string
 }
 
-export function ImageUploader({ value, onChange, label, description }: ImageUploaderProps) {
+export function ImageUploader({ value, onChange, onChangeBlur, label, description }: ImageUploaderProps) {
   const [uploading, setUploading] = useState(false)
   const [dragOver, setDragOver] = useState(false)
 
@@ -28,6 +31,9 @@ export function ImageUploader({ value, onChange, label, description }: ImageUplo
       const data = await res.json()
       if (data.url) {
         onChange(data.url)
+        if (data.blurDataURL && onChangeBlur) {
+          onChangeBlur(data.blurDataURL)
+        }
       } else {
         alert(data.error || 'Upload failed')
       }
@@ -36,7 +42,7 @@ export function ImageUploader({ value, onChange, label, description }: ImageUplo
     } finally {
       setUploading(false)
     }
-  }, [onChange])
+  }, [onChange, onChangeBlur])
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault()
