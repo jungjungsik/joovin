@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { isAdminUser } from '@/lib/auth/admin'
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -31,13 +32,24 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Protect admin routes
-  if (request.nextUrl.pathname.startsWith('/admin') &&
-      !request.nextUrl.pathname.startsWith('/admin/login') &&
-      !user) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/admin/login'
-    return NextResponse.redirect(url)
+  const isAdminPath =
+    request.nextUrl.pathname.startsWith('/admin') &&
+    !request.nextUrl.pathname.startsWith('/admin/login')
+
+  if (isAdminPath) {
+    if (!user) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/admin/login'
+      return NextResponse.redirect(url)
+    }
+    if (!isAdminUser(user)) {
+      // Logged in but not in ADMIN_EMAILS — sign out and bounce to login.
+      await supabase.auth.signOut()
+      const url = request.nextUrl.clone()
+      url.pathname = '/admin/login'
+      url.searchParams.set('error', 'forbidden')
+      return NextResponse.redirect(url)
+    }
   }
 
   return supabaseResponse

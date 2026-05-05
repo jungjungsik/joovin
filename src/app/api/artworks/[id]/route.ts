@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { deleteManyFromR2 } from '@/lib/r2/client'
+import { isAdminUser } from '@/lib/auth/admin'
 import {
   ALLOWED_ARTWORK_FIELDS,
   pickArtworkFields,
@@ -38,6 +39,9 @@ export async function PUT(request: NextRequest, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  if (!isAdminUser(user)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
   const body = await request.json()
@@ -95,6 +99,9 @@ export async function DELETE(request: NextRequest, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  if (!isAdminUser(user)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
   // Fetch row first so we can clean up R2 and invalidate the slug path.

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { uploadToR2 } from '@/lib/r2/client'
+import { isAdminUser } from '@/lib/auth/admin'
 
 const MAX_FILE_BYTES = 15 * 1024 * 1024 // 15MB
 // Some browsers (notably IE-era Windows uploads) report PNG as "image/x-png".
@@ -52,6 +53,9 @@ export async function POST(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  if (!isAdminUser(user)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
   const formData = await request.formData()

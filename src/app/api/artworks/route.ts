@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { isAdminUser } from '@/lib/auth/admin'
 import { ALLOWED_ARTWORK_FIELDS, pickArtworkFields, generateUniqueSlug } from './_helpers'
 
 // GET /api/artworks - Get all artworks
@@ -27,6 +28,9 @@ export async function POST(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  if (!isAdminUser(user)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
   const body = await request.json()
