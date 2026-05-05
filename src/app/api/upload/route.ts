@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { uploadToR2 } from '@/lib/r2/client'
+import { stripJpegExif } from '@/lib/r2/exifStrip'
 import { isAdminUser } from '@/lib/auth/admin'
 
 const MAX_FILE_BYTES = 15 * 1024 * 1024 // 15MB
@@ -87,7 +88,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'File too large. Max 15MB' }, { status: 400 })
     }
 
-    const url = await uploadToR2(buffer, `upload.${detected.ext}`, detected.mime)
+    // Strip EXIF from JPEGs (camera + GPS metadata). Lossless — we don't
+    // re-encode the pixels. PNG/WebP pass through unchanged.
+    const sanitized =
+      detected.mime === 'image/jpeg' ? stripJpegExif(buffer) : buffer
+
+    const url = await uploadToR2(sanitized, `upload.${detected.ext}`, detected.mime)
 
     return NextResponse.json({ url })
   } catch (error) {

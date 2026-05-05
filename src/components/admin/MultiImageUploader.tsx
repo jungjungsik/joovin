@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useCallback } from 'react'
+import { compressImage } from '@/lib/utils/imageCompress'
 
 interface MultiImageUploaderProps {
   value: string[]
@@ -22,8 +23,9 @@ export function MultiImageUploader({
 
   const handleUpload = useCallback(async (file: File, index: number) => {
     setUploadingIndex(index)
+    const prepared = await compressImage(file)
     const formData = new FormData()
-    formData.append('file', file)
+    formData.append('file', prepared)
 
     try {
       const res = await fetch('/api/upload', {
