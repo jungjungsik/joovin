@@ -1,31 +1,18 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ArtistStatement } from "@/components/home/ArtistStatement";
 import { SelectedWorks } from "@/components/home/SelectedWorks";
 import { HomeFooter } from "@/components/home/HomeFooter";
-import { getFeaturedArtworks } from "@/lib/data/artworks";
-import { Artwork } from "@/types";
+import { getFeaturedArtworksServer } from "@/lib/data/artworks.server";
+import { getSettingsServer } from "@/lib/data/settings.server";
 
-interface Settings {
-  homeHeroImage?: string;
-  artistStatement?: string;
-}
+export const revalidate = 60;
 
-export default function HomePage() {
-  const [featuredArtworks, setFeaturedArtworks] = useState<Artwork[]>([]);
-  const [settings, setSettings] = useState<Settings>({});
-
-  useEffect(() => {
-    getFeaturedArtworks().then(setFeaturedArtworks);
-
-    fetch("/api/settings")
-      .then((res) => res.json())
-      .then((data) => setSettings(data))
-      .catch((error) => console.error("Failed to fetch settings:", error));
-  }, []);
+export default async function HomePage() {
+  const [featuredArtworks, settings] = await Promise.all([
+    getFeaturedArtworksServer(),
+    getSettingsServer(),
+  ]);
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark">
@@ -48,12 +35,7 @@ export default function HomePage() {
           </div>
         )}
 
-        <ArtistStatement
-          quote={
-            settings.artistStatement ||
-            "My work explores the intersection of creative process and authenticity, using traditional mediums to express contemporary themes of human connection."
-          }
-        />
+        <ArtistStatement quote={settings.artistStatement} />
 
         <SelectedWorks artworks={featuredArtworks} />
       </main>

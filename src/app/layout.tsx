@@ -46,20 +46,14 @@ export const metadata: Metadata = {
     siteName: "Joovin NAM Portfolio",
     title: "Joovin NAM | Art Portfolio",
     description: "High school art student portfolio showcasing paintings, drawings, and mixed media works.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Joovin NAM Art Portfolio",
-      },
-    ],
+    // Per-page OG images (e.g. artwork hero) are set in route-level
+    // generateMetadata; the root layout intentionally omits a static
+    // image so we don't ship a 404 OG when an asset is missing.
   },
   twitter: {
     card: "summary_large_image",
     title: "Joovin NAM | Art Portfolio",
     description: "High school art student portfolio showcasing paintings, drawings, and mixed media works.",
-    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,

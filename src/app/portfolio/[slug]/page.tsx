@@ -13,6 +13,7 @@ import {
   BackToPortfolio,
 } from "@/components/artwork";
 import { getAllSlugs, getArtworkBySlug, getAdjacentArtworks } from "@/lib/data/artworks";
+import { getSettingsServer } from "@/lib/data/settings.server";
 
 // Revalidate pages every 60 seconds to pick up content changes
 export const revalidate = 60;
@@ -34,7 +35,10 @@ export async function generateMetadata({
   params,
 }: ArtworkPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const artwork = await getArtworkBySlug(slug);
+  const [artwork, settings] = await Promise.all([
+    getArtworkBySlug(slug),
+    getSettingsServer(),
+  ]);
 
   if (!artwork) {
     return {
@@ -42,20 +46,24 @@ export async function generateMetadata({
     };
   }
 
+  const siteName = settings.siteName || "Portfolio";
+  const heroOrThumb = artwork.heroImage || artwork.thumbnail;
+  const ogImages = heroOrThumb ? [heroOrThumb] : undefined;
+
   return {
-    title: `${artwork.title} | A. Sterling`,
+    title: `${artwork.title} | ${siteName}`,
     description: artwork.description,
     openGraph: {
       title: artwork.title,
       description: artwork.description,
-      images: [artwork.heroImage],
+      images: ogImages,
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: artwork.title,
       description: artwork.description,
-      images: [artwork.heroImage],
+      images: ogImages,
     },
   };
 }
