@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import { ImageUploader } from "@/components/admin/ImageUploader";
 import { MultiImageUploader } from "@/components/admin/MultiImageUploader";
 import { TagInput } from "@/components/admin/TagInput";
@@ -118,26 +119,33 @@ export default function SettingsPage() {
 
   const handleSave = async () => {
     setSaving(true);
-    try {
-      // Stringify array fields for storage
-      const dataToSave = {
-        ...settings,
-        profileImages: JSON.stringify(settings.profileImages),
-        interests: JSON.stringify(settings.interests),
-        processText: JSON.stringify(settings.processText),
-      };
-      const res = await fetch("/api/settings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dataToSave),
-      });
-      if (res.ok) {
-        alert("Settings saved successfully!");
-      } else {
-        alert("Failed to save settings");
+    const dataToSave = {
+      ...settings,
+      profileImages: JSON.stringify(settings.profileImages),
+      interests: JSON.stringify(settings.interests),
+      processText: JSON.stringify(settings.processText),
+    };
+    const request = fetch("/api/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataToSave),
+    }).then(async (res) => {
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Failed to save settings");
       }
+    });
+
+    toast.promise(request, {
+      loading: "Saving settings…",
+      success: "Settings saved",
+      error: (err: Error) => err.message,
+    });
+
+    try {
+      await request;
     } catch {
-      alert("Failed to save settings");
+      // toast already surfaced the error
     } finally {
       setSaving(false);
     }

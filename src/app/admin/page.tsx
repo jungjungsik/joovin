@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { toast } from 'sonner'
 
 interface Artwork {
   id: string
@@ -27,11 +28,24 @@ export default function AdminDashboard() {
       })
   }, [])
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this artwork?')) return
+  const handleDelete = async (id: string, title: string) => {
+    if (!confirm(`Delete "${title}"? This also removes its uploaded images from R2.`)) return
 
-    await fetch(`/api/artworks/${id}`, { method: 'DELETE' })
-    setArtworks(artworks.filter(a => a.id !== id))
+    const request = fetch(`/api/artworks/${id}`, { method: 'DELETE' }).then(async (res) => {
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Delete failed')
+      }
+    })
+
+    toast.promise(request, {
+      loading: 'Deleting…',
+      success: () => {
+        setArtworks((prev) => prev.filter((a) => a.id !== id))
+        return `Deleted "${title}"`
+      },
+      error: (err: Error) => err.message,
+    })
   }
 
   if (loading) {
@@ -110,7 +124,7 @@ export default function AdminDashboard() {
                       Edit
                     </Link>
                     <button
-                      onClick={() => handleDelete(artwork.id)}
+                      onClick={() => handleDelete(artwork.id, artwork.title)}
                       className="text-red-500 hover:underline"
                     >
                       Delete

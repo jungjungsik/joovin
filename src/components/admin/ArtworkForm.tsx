@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 import { ImageUploader } from './ImageUploader'
 import { MultiImageUploader } from './MultiImageUploader'
 
@@ -74,22 +75,32 @@ export function ArtworkForm({ initialData, artworkId }: ArtworkFormProps) {
       process_images: (formData.process_images || []).filter((u) => typeof u === 'string' && u.length > 0),
     }
 
-    try {
-      const res = await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cleanedPayload),
-      })
+    const request = fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cleanedPayload),
+    }).then(async (res) => {
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to save')
+      }
+      return res
+    })
 
-      if (res.ok) {
+    toast.promise(request, {
+      loading: artworkId ? 'Updating artwork…' : 'Creating artwork…',
+      success: () => {
         router.push('/admin')
         router.refresh()
-      } else {
-        const data = await res.json()
-        alert(data.error || 'Failed to save')
-      }
+        return artworkId ? 'Artwork updated' : 'Artwork created'
+      },
+      error: (err: Error) => err.message,
+    })
+
+    try {
+      await request
     } catch {
-      alert('Failed to save')
+      // toast.promise already surfaced the error
     } finally {
       setLoading(false)
     }

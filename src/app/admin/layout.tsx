@@ -1,3 +1,4 @@
+import { Toaster } from 'sonner'
 import { createClient } from '@/lib/supabase/server'
 import { AdminSidebar } from '@/components/admin/AdminSidebar'
 import { getSettingsServer } from '@/lib/data/settings.server'
@@ -17,6 +18,7 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-background-dark">
+      <Toaster position="bottom-right" richColors closeButton />
       {user ? (
         <div className="flex">
           <AdminSidebar user={user} siteName={siteName} />

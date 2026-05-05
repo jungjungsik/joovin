@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useCallback } from 'react'
+import { toast } from 'sonner'
 import { compressImage } from '@/lib/utils/imageCompress'
 
 interface ImageUploaderProps {
@@ -35,10 +36,10 @@ export function ImageUploader({ value, onChange, onChangeBlur, label, descriptio
           onChangeBlur(data.blurDataURL)
         }
       } else {
-        alert(data.error || 'Upload failed')
+        toast.error(data.error || 'Upload failed')
       }
     } catch {
-      alert('Upload failed')
+      toast.error('Upload failed')
     } finally {
       setUploading(false)
     }
